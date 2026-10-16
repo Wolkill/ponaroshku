@@ -203,7 +203,6 @@ a:hover { text-decoration-thickness: 2px; }
   background: var(--sheet); color: var(--m-red);
   font: 500 .9rem/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase;
 }
-.card-aside { margin-top: 40px; font-size: .9rem; color: var(--ink-soft); max-width: 40em; }
 
 /* Sections */
 .section { padding-block: clamp(56px, 8vw, 104px); }
@@ -250,14 +249,47 @@ a:hover { text-decoration-thickness: 2px; }
 .catalyst svg path { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .catalyst .label { color: var(--m-green); font-size: .7rem; }
 
-/* Steps */
-.steps { padding: 0; list-style: none; display: grid; gap: 22px; counter-reset: step; }
-@media (min-width: 700px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; } }
-@media (min-width: 1000px) { .steps--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
-.step { display: grid; gap: 8px; align-content: start; padding-top: 14px; border-top: 2px solid var(--c, var(--ink)); }
-.step h3 { font-weight: 700; font-size: 1.5rem; }
-.step p:not(.label) { font-size: .98rem; }
-.step-quote { margin-top: 26px; max-width: var(--measure); padding-left: 18px; border-left: 3px solid var(--ink); font-style: italic; }
+/* Evening: a time scale, then the agenda */
+.day { position: relative; padding-block: 24px; margin-bottom: clamp(28px, 4vw, 40px); }
+.day-bar { display: grid; grid-template-columns: 20fr 120fr 40fr; gap: 3px; height: 16px; border-radius: 999px; overflow: hidden; }
+.day-seg--gather { background: var(--ink-soft); }
+.day-seg--work { background: var(--ink); }
+.day-seg--conf { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.day-seg--conf i { background: var(--c); }
+.day-tick {
+  position: absolute; bottom: 0; left: calc(var(--at) / 180 * 100%);
+  transform: translateX(var(--x, -50%));
+  font: 500 .72rem/1 var(--font-mono); color: var(--ink-soft); white-space: nowrap;
+}
+.day-tick--up { top: 0; bottom: auto; }
+.agenda { padding: 0; list-style: none; display: grid; border-top: 2px solid var(--ink); }
+.ag-item { display: grid; gap: 8px 32px; padding: 22px 0 30px; border-bottom: 1px solid var(--rule); }
+@media (min-width: 820px) { .ag-item { grid-template-columns: 9.5rem minmax(0, 1fr); } }
+.ag-time { font: 700 1.45rem/1.15 var(--font-display); font-variant-numeric: tabular-nums; }
+.ag-body { display: grid; gap: 14px; align-content: start; }
+.ag-body h3 { font-weight: 700; font-size: 1.75rem; }
+.ag-body > p { max-width: var(--measure); }
+.ag-q { font: 700 clamp(1.45rem, 1.3rem + .6vw, 1.75rem)/1.15 var(--font-hand); color: var(--m-red); }
+.answers { padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.answers li { padding: 6px 12px; border: 1px solid var(--rule); border-radius: 999px; background: var(--sheet); font-size: .92rem; line-height: 1.3; }
+.groups { display: grid; gap: 14px; }
+@media (min-width: 640px) { .groups { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.grp { --accent: var(--c); display: grid; gap: 10px; align-content: start; padding: 14px 16px 16px; background: var(--sheet); border: 1px solid var(--rule); border-top: 4px solid var(--c); }
+.grp-name { font: 700 1.4rem/1.1 var(--font-display); color: var(--c); }
+.grp .team { flex-direction: column; gap: 4px; margin-top: 0; }
+.grp a { font: 500 .8rem/1.3 var(--font-mono); letter-spacing: .03em; color: var(--c); }
+.mins { padding: 0; list-style: none; display: grid; gap: 8px; max-width: 36rem; }
+.mins li { display: grid; grid-template-columns: 12.5rem minmax(0, 1fr) 3.6rem; align-items: center; gap: 12px; }
+.mins span { font-size: .95rem; }
+.mins i { display: block; width: calc(var(--m) / 6 * 100%); height: 12px; border-radius: 999px; background: var(--ink); }
+.mins b { font: 500 .76rem/1 var(--font-mono); color: var(--ink-soft); text-align: right; }
+@media (max-width: 559px) { .mins li { grid-template-columns: minmax(0, 1fr) 3.6rem; gap: 4px 12px; } .mins span { grid-column: 1 / -1; } }
+.terms { display: grid; gap: 6px; }
+.terms div { display: flex; flex-wrap: wrap; gap: 0 6px; }
+.terms dt { font-weight: 600; }
+.terms dt::after { content: " —"; }
+.terms dd { margin: 0; color: var(--ink-soft); }
+.step-quote { max-width: var(--measure); padding-left: 18px; border-left: 3px solid var(--ink); font-style: italic; }
 .step-quote .label { display: block; margin-top: 6px; font-style: normal; font-size: .7rem; }
 
 /* Photo gallery */
@@ -284,7 +316,7 @@ a:hover { text-decoration-thickness: 2px; }
   margin-bottom: clamp(26px, 4vw, 40px);
 }
 @media (max-width: 559px) { .case-head { grid-template-columns: minmax(0, 1fr); } }
-.case-num { grid-row: span 4; align-self: center; font: 700 clamp(6rem, 3.6rem + 9vw, 10.5rem)/.72 var(--font-hand); color: var(--accent); }
+.case-num { grid-row: span 3; align-self: center; font: 700 clamp(6rem, 3.6rem + 9vw, 10.5rem)/.72 var(--font-hand); color: var(--accent); }
 @media (max-width: 559px) { .case-num { grid-row: auto; font-size: 5.2rem; } }
 .case .eyebrow { color: var(--accent); }
 .case h2 { font-weight: 800; font-size: clamp(2.4rem, 1.1rem + 5vw, 4.7rem); line-height: .92; }
@@ -293,6 +325,7 @@ a:hover { text-decoration-thickness: 2px; }
 .team div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
 .team dt { font: 500 .7rem/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
 .team dd { margin: 0; font: 600 1.4rem/1.15 var(--font-hand); }
+.case-words { display: grid; gap: 16px; margin-bottom: clamp(44px, 7vw, 76px); }
 .spread { display: grid; gap: clamp(26px, 4vw, 48px); align-items: start; }
 @media (min-width: 940px) { .spread { grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr); } }
 
@@ -451,10 +484,12 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* Discussion: questions and judgments in one stream; open ones are tagged in place */
 .case-body { display: grid; gap: 22px; margin-top: clamp(44px, 7vw, 76px); }
-.talk { columns: 2 340px; column-gap: 44px; }
-.t-item { break-inside: avoid; margin: 0 0 28px; }
+.conf { display: grid; gap: 34px 44px; align-items: start; }
+@media (min-width: 900px) { .conf { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); } }
+.conf-col { display: grid; gap: 34px; align-content: start; }
+.conf-block { display: grid; gap: 20px; align-content: start; }
+.conf-h { padding-bottom: 8px; border-bottom: 2px solid var(--accent); font-weight: 700; font-size: 1.45rem; }
 .t-q { padding-left: 16px; border-left: 3px solid var(--ink); }
-.t-q > .label { font-size: .7rem; }
 .q { margin-top: 4px; font: 700 1.25rem/1.22 var(--font-display); }
 .a { margin-top: 6px; }
 .remark { padding-left: 16px; border-left: 3px solid var(--accent); font-style: italic; }
@@ -543,16 +578,15 @@ a:hover { text-decoration-thickness: 2px; }
   <section class="hero" aria-labelledby="title">
     <div class="wrap">
       <div class="hero-text">
-        <p class="label">Отчёт о встрече · <span class="nowrap">13 октября 2026</span> · <span class="nowrap">18:30–21:00</span> · <span class="nowrap">РанДом Культуры</span></p>
+        <p class="label">Отчёт о встрече · <span class="nowrap">13 октября 2026</span> · <span class="nowrap">18:00–21:00</span> · <span class="nowrap">РанДом Культуры</span></p>
         <h1 id="title"><span class="line">Мир</span> <span class="line"><span class="circled"><span class="hollow">понарошку</span><svg viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M24 70 C10 40 70 10 160 9 C250 8 296 28 292 52 C288 80 210 95 140 93 C70 91 14 80 16 56 C18 38 50 24 98 18"/></svg></span></span></h1>
-        <p class="lead">Две группы придумали два мира. В первом подлинность проступает, когда нарушают правила игры. Во втором человечество застряло во всеобщем дне сурка и выбирается из него, играя в то, что завтра существует.</p>
+        <p class="lead">13 октября в «РанДоме Культуры» решали парадоксальную задачу. Сначала знакомство и разминка, потом две группы два часа строили свои миры, а в конце защищали их на конференции.</p>
         <ul class="toc" aria-label="Разделы">
           <li><a href="#task">Условие</a></li>
-          <li><a href="#words">Минус и плюс</a></li>
-          <li><a href="#format">Разбор</a></li>
+          <li><a href="#evening">Вечер</a></li>
           <li><a href="#photos">Фото</a></li>
-          <li><a href="#rules"><span class="dot" style="--c: var(--m-red)"></span>Нарушение правил</a></li>
-          <li><a href="#groundhog"><span class="dot" style="--c: var(--m-blue)"></span>День сурка</a></li>
+          <li><a href="#rules"><span class="dot" style="--c: var(--m-red)"></span>Группа Кота</a></li>
+          <li><a href="#groundhog"><span class="dot" style="--c: var(--m-blue)"></span>Группа Буран</a></li>
         </ul>
       </div>
 
@@ -574,82 +608,95 @@ a:hover { text-decoration-thickness: 2px; }
           </div>
           <p class="stamp">Не понарошку</p>
         </article>
-        <p class="card-aside">Обе группы оставили мир похожим на наш, без марсиан и волшебства. Понарошку в нём стало отношение людей к правилам и последствиям.</p>
       </div>
     </div>
   </section>
 
-  <section class="section" id="words" aria-labelledby="words-title">
+  <section class="section" id="evening" aria-labelledby="evening-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="label">Два слова задачи</p>
-        <h2 id="words-title">Минус и плюс</h2>
-        <p>Первая группа начала с того, что разобрала оба слова задачи.</p>
+        <p class="label">18:00–21:00</p>
+        <h2 id="evening-title">Как был устроен вечер</h2>
       </div>
-      <div class="duo">
-        <div class="pole pole--minus">
-          <div class="pole-head"><span class="sign" aria-hidden="true">−</span><h3>Понарошку</h3></div>
-          <ol>
-            <li><span class="term">Отсутствие последствий</span><p>Играешь в бумажные деньги, а твой кошелёк не меняется. Разбил что-нибудь — ничего страшного, всё было понарошку.</p></li>
-            <li><span class="term">Искажение настоящего</span><p>Суп можно есть по-настоящему, а можно понарошку. Это уже искажение настоящего.</p></li>
-            <li><span class="term">Отвержение подлинности</span><p>Если всё понарошку, подлинности в мире нет. Эту составляющую добавили, чтобы полнее раскрыть проблему задачи.</p></li>
-          </ol>
-        </div>
-        <div class="catalyst" aria-label="Игра — катализатор">
-          <span class="hand-word">игра</span>
-          <svg viewBox="0 0 92 40" aria-hidden="true"><path d="M4 14 H70 M4 26 H70 M62 4 L86 20 L62 36"/></svg>
-          <span class="label">катализатор</span>
-        </div>
-        <div class="pole pole--plus">
-          <div class="pole-head"><span class="sign" aria-hidden="true">+</span><h3>Подлинность</h3></div>
-          <ol>
-            <li><span class="term">Соответствие реальности</span></li>
-            <li><span class="term">Естественность</span></li>
-            <li><span class="term">Всамделишность</span></li>
-          </ol>
-          <p class="note">В схеме на плакате у подлинности есть ещё одно имя: «на самом деле».</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="section" id="format" aria-labelledby="format-title">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="label">Формат</p>
-        <h2 id="format-title">Как шёл разбор</h2>
+      <div class="day" role="img" aria-label="Шкала вечера: с 18:00 до 18:20 сбор, с 18:20 до 20:20 работа в группах, с 20:20 до 21:00 конференция, по 20 минут на каждую группу">
+        <div class="day-bar">
+          <span class="day-seg day-seg--gather"></span>
+          <span class="day-seg day-seg--work"></span>
+          <span class="day-seg day-seg--conf"><i style="--c: var(--m-red)"></i><i style="--c: var(--m-blue)"></i></span>
+        </div>
+        <span class="day-tick" style="--at: 0; --x: 0">18:00</span>
+        <span class="day-tick day-tick--up" style="--at: 20">18:20</span>
+        <span class="day-tick day-tick--up" style="--at: 140">20:20</span>
+        <span class="day-tick" style="--at: 180; --x: -100%">21:00</span>
       </div>
-      <ol class="steps steps--5">
-        <li class="step">
-          <p class="label">Шаг 1</p>
-          <h3>Плакат</h3>
-          <p>Каждая группа с координатором вырабатывает позицию и рисует её маркерами на большом листе.</p>
+
+      <ol class="agenda">
+        <li class="ag-item">
+          <p class="ag-time">18:00–18:20</p>
+          <div class="ag-body">
+            <h3>Сбор</h3>
+            <p>Слушаем условие задачи, представляемся и отвечаем на разминочный вопрос.</p>
+            <p class="ag-q">Если бы можно было оставить только одну игру, то какую?</p>
+            <ul class="answers" aria-label="Ответы">
+              <li>«Майнкрафт»</li>
+              <li>ГТА</li>
+              <li>прятки</li>
+              <li>какая-то компьютерная игра</li>
+              <li>театр</li>
+              <li>игра, в которой проигрываешь, как только о ней вспомнил</li>
+              <li>Кот: ни во что, по крайней мере сейчас</li>
+            </ul>
+          </div>
         </li>
-        <li class="step">
-          <p class="label">Шаг 2</p>
-          <h3>Доклад</h3>
-          <p>Группа рассказывает свой мир по плакату.</p>
+        <li class="ag-item">
+          <p class="ag-time">18:20–20:20</p>
+          <div class="ag-body">
+            <h3>Работа в группах</h3>
+            <p>Разделились на две группы. Два часа каждая решала задачу: у группы есть координатор, все вместе накидывают ходы решения. Примерно за 30 минут до конца нужно всё собрать в более-менее стройную картинку и нарисовать плакат с основными моментами — модель того, как решается задача. Если всё решили и время осталось, что бывает редко, можно проблематизировать своё решение самим.</p>
+            <div class="groups">
+              <div class="grp" style="--c: var(--m-red)">
+                <p class="grp-name">Группа Кота</p>
+                <dl class="team">
+                  <div><dt>Координатор</dt><dd>Кот</dd></div>
+                  <div><dt>Участники</dt><dd>Илья, Аня, Иван, Гена</dd></div>
+                </dl>
+                <a href="#rules">Игра в нарушение правил</a>
+              </div>
+              <div class="grp" style="--c: var(--m-blue)">
+                <p class="grp-name">Группа Буран</p>
+                <dl class="team">
+                  <div><dt>Координатор</dt><dd>Буран</dd></div>
+                  <div><dt>Участники</dt><dd>Спектр, Зеркало, Дима, Матвей</dd></div>
+                </dl>
+                <a href="#groundhog">День сурка (всеобщий)</a>
+              </div>
+            </div>
+          </div>
         </li>
-        <li class="step">
-          <p class="label">Шаг 3</p>
-          <h3>Вопросы на понимание</h3>
-          <p>Из зала уточняют, как этот мир устроен.</p>
-        </li>
-        <li class="step">
-          <p class="label">Шаг 4</p>
-          <h3>Проблематизация</h3>
-          <p>Показывают, где решение расходится с задачей или само с собой.</p>
-        </li>
-        <li class="step">
-          <p class="label">Шаг 5</p>
-          <h3>Суждения</h3>
-          <p>Высказывания на развитие идеи.</p>
+        <li class="ag-item">
+          <p class="ag-time">20:20–21:00</p>
+          <div class="ag-body">
+            <h3>Конференция</h3>
+            <p>Сорок минут, по двадцать на каждую группу. Сначала группа рассказывает своё решение по плакату, потом три блока вопросов из зала.</p>
+            <ul class="mins" aria-label="Двадцать минут на группу">
+              <li style="--m: 6"><span>Доклад</span><i></i><b>6 мин</b></li>
+              <li style="--m: 6"><span>Вопросы на понимание</span><i></i><b>6 мин</b></li>
+              <li style="--m: 6"><span>Проблематизация</span><i></i><b>6 мин</b></li>
+              <li style="--m: 2"><span>Суждения</span><i></i><b>2 мин</b></li>
+            </ul>
+            <dl class="terms">
+              <div><dt>Вопросы на понимание</dt><dd>уточняют, как устроен мир группы</dd></div>
+              <div><dt>Проблематизация</dt><dd>показывает, где решение расходится с задачей или само с собой</dd></div>
+              <div><dt>Суждения</dt><dd>высказывания на развитие идеи</dd></div>
+            </dl>
+            <blockquote class="step-quote">
+              <p>«Отвечать на суждение нельзя. Это важно».</p>
+              <span class="label">Из правил конференции</span>
+            </blockquote>
+          </div>
         </li>
       </ol>
-      <blockquote class="step-quote">
-        <p>«Отвечать на суждение нельзя. Это важно».</p>
-        <span class="label">Из правил разбора</span>
-      </blockquote>
     </div>
   </section>
 
@@ -674,24 +721,24 @@ a:hover { text-decoration-thickness: 2px; }
         </li>
         <li>
           <figure>
-            <button class="photo-btn" type="button" data-full="assets/photos/02.jpg" data-caption="Первая группа выходит с плакатом">
+            <button class="photo-btn" type="button" data-full="assets/photos/02.jpg" data-caption="Группа Кота выходит с плакатом">
               <picture>
                 <source type="image/webp" srcset="assets/photos/02-sm.webp 900w, assets/photos/02.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
                 <img src="assets/photos/02-sm.jpg" srcset="assets/photos/02-sm.jpg 900w, assets/photos/02.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Участник держит плакат «Понарошку», рядом стоят ещё двое из группы, на первом плане участница." loading="lazy" decoding="async">
               </picture>
             </button>
-            <figcaption>Первая группа выходит с плакатом</figcaption>
+            <figcaption>Группа Кота выходит с плакатом</figcaption>
           </figure>
         </li>
         <li>
           <figure>
-            <button class="photo-btn" type="button" data-full="assets/photos/03.jpg" data-caption="Доклад первой группы">
+            <button class="photo-btn" type="button" data-full="assets/photos/03.jpg" data-caption="Доклад группы Кота">
               <picture>
                 <source type="image/webp" srcset="assets/photos/03-sm.webp 900w, assets/photos/03.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
                 <img src="assets/photos/03-sm.jpg" srcset="assets/photos/03-sm.jpg 900w, assets/photos/03.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Трое у кирпичной стены, в центре участник держит плакат «Понарошку»." loading="lazy" decoding="async">
               </picture>
             </button>
-            <figcaption>Доклад первой группы</figcaption>
+            <figcaption>Доклад группы Кота</figcaption>
           </figure>
         </li>
         <li>
@@ -707,13 +754,13 @@ a:hover { text-decoration-thickness: 2px; }
         </li>
         <li>
           <figure>
-            <button class="photo-btn" type="button" data-full="assets/photos/05.jpg" data-caption="Доклад второй группы">
+            <button class="photo-btn" type="button" data-full="assets/photos/05.jpg" data-caption="Доклад группы Буран">
               <picture>
                 <source type="image/webp" srcset="assets/photos/05-sm.webp 900w, assets/photos/05.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
                 <img src="assets/photos/05-sm.jpg" srcset="assets/photos/05-sm.jpg 900w, assets/photos/05.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Общий план зала: двое держат плакат «День сурка», слушатели сидят на полу и на стульях." loading="lazy" decoding="async">
               </picture>
             </button>
-            <figcaption>Доклад второй группы</figcaption>
+            <figcaption>Доклад группы Буран</figcaption>
           </figure>
         </li>
         <li>
@@ -721,7 +768,7 @@ a:hover { text-decoration-thickness: 2px; }
             <button class="photo-btn" type="button" data-full="assets/photos/06.jpg" data-caption="«День сурка (всеобщий)»">
               <picture>
                 <source type="image/webp" srcset="assets/photos/06-sm.webp 900w, assets/photos/06.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
-                <img src="assets/photos/06-sm.jpg" srcset="assets/photos/06-sm.jpg 900w, assets/photos/06.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Двое докладчиков второй группы держат плакат и рассказывают." loading="lazy" decoding="async">
+                <img src="assets/photos/06-sm.jpg" srcset="assets/photos/06-sm.jpg 900w, assets/photos/06.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Двое докладчиков группы Буран держат плакат и рассказывают." loading="lazy" decoding="async">
               </picture>
             </button>
             <figcaption>«День сурка (всеобщий)»</figcaption>
@@ -729,13 +776,13 @@ a:hover { text-decoration-thickness: 2px; }
         </li>
         <li>
           <figure>
-            <button class="photo-btn" type="button" data-full="assets/photos/07.jpg" data-caption="Плакат второй группы">
+            <button class="photo-btn" type="button" data-full="assets/photos/07.jpg" data-caption="Плакат группы Буран">
               <picture>
                 <source type="image/webp" srcset="assets/photos/07-sm.webp 900w, assets/photos/07.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
                 <img src="assets/photos/07-sm.jpg" srcset="assets/photos/07-sm.jpg 900w, assets/photos/07.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Докладчик улыбается и держит плакат «День сурка (всеобщий)»." loading="lazy" decoding="async">
               </picture>
             </button>
-            <figcaption>Плакат второй группы</figcaption>
+            <figcaption>Плакат группы Буран</figcaption>
           </figure>
         </li>
         <li>
@@ -769,18 +816,42 @@ a:hover { text-decoration-thickness: 2px; }
     <div class="wrap">
       <header class="case-head">
         <span class="case-num" aria-hidden="true">1</span>
-        <p class="label eyebrow">Решение первой группы</p>
+        <p class="label eyebrow">Доклад 1 · группа Кота</p>
         <h2 id="rules-title">Игра в нарушение правил</h2>
         <p class="case-sub">понарошку → игра → подлинность</p>
-        <dl class="team">
-          <div><dt>Координатор</dt><dd>Кот</dd></div>
-          <div><dt>Участники</dt><dd>Илья, Аня, Иван, Гена</dd></div>
-        </dl>
       </header>
+
+      <section class="case-words" aria-labelledby="words-title">
+        <h3 class="label" id="words-title">С чего группа начала: два слова задачи</h3>
+        <div class="duo">
+          <div class="pole pole--minus">
+            <div class="pole-head"><span class="sign" aria-hidden="true">−</span><h3>Понарошку</h3></div>
+            <ol>
+              <li><span class="term">Отсутствие последствий</span><p>Играешь в бумажные деньги, а твой кошелёк не меняется. Разбил что-нибудь — ничего страшного, всё было понарошку.</p></li>
+              <li><span class="term">Искажение настоящего</span><p>Суп можно есть по-настоящему, а можно понарошку. Это уже искажение настоящего.</p></li>
+              <li><span class="term">Отвержение подлинности</span><p>Если всё понарошку, подлинности в мире нет. Эту составляющую добавили, чтобы полнее раскрыть проблему задачи.</p></li>
+            </ol>
+          </div>
+          <div class="catalyst" aria-label="Игра — катализатор">
+            <span class="hand-word">игра</span>
+            <svg viewBox="0 0 92 40" aria-hidden="true"><path d="M4 14 H70 M4 26 H70 M62 4 L86 20 L62 36"/></svg>
+            <span class="label">катализатор</span>
+          </div>
+          <div class="pole pole--plus">
+            <div class="pole-head"><span class="sign" aria-hidden="true">+</span><h3>Подлинность</h3></div>
+            <ol>
+              <li><span class="term">Соответствие реальности</span></li>
+              <li><span class="term">Естественность</span></li>
+              <li><span class="term">Всамделишность</span></li>
+            </ol>
+            <p class="note">В схеме на плакате у подлинности есть ещё одно имя: «на самом деле».</p>
+          </div>
+        </div>
+      </section>
 
       <div class="spread">
         <figure class="poster">
-          <button class="poster-btn" type="button" data-full="assets/posters/game.jpg" data-caption="Плакат первой группы «Понарошку»">
+          <button class="poster-btn" type="button" data-full="assets/posters/game.jpg" data-caption="Плакат группы Кота «Понарошку»">
             <picture>
               <source type="image/webp" srcset="assets/posters/game-sm.webp 1100w, assets/posters/game.webp 2200w" sizes="(min-width: 940px) 620px, 100vw">
               <img src="assets/posters/game-sm.jpg" srcset="assets/posters/game-sm.jpg 1100w, assets/posters/game.jpg 2200w" sizes="(min-width: 940px) 620px, 100vw" width="1100" height="750" alt="Плакат «Понарошку»: три составляющие понарошку, схема от минуса к плюсу через игру, цикл от игры с правилами к игре в нарушение правил и подлинности, рисунок бегуна, машины и самолёта, определение подлинности и зелёный сурок." loading="lazy" decoding="async">
@@ -807,11 +878,11 @@ a:hover { text-decoration-thickness: 2px; }
         </figure>
 
         <section class="story-wrap" aria-labelledby="rules-story">
-          <h3 class="label" id="rules-story">Как устроен этот мир</h3>
+          <h3 class="label" id="rules-story">Доклад: как устроен этот мир</h3>
           <ol class="story">
             <li class="s-step s-step--pale">
               <p class="hand">Стало понарошку</p>
-              <p>Общество жило по первичным правилам, заданным на старте, и всё было слишком серьёзно: цивилизация слишком масштабная, а всё социальное держится на договорённостях. Серьёзность надоела, люди начали играть, и правила перестали воспринимать всерьёз. Вместе с ними исчезли последствия.</p>
+              <p>Мир такой же, как наш: марсиан придумывать не стали. Общество жило по первичным правилам, заданным на старте, и всё было слишком серьёзно: цивилизация слишком масштабная, а всё социальное держится на договорённостях. Серьёзность надоела, люди начали играть, и правила перестали воспринимать всерьёз. Вместе с ними исчезли последствия.</p>
             </li>
             <li class="s-step">
               <p class="hand">Игра с правилами</p>
@@ -872,36 +943,50 @@ a:hover { text-decoration-thickness: 2px; }
       </figure>
 
       <section class="case-body" aria-labelledby="rules-talk">
-        <h3 class="label" id="rules-talk">Из обсуждения</h3>
-        <div class="talk">
-          <div class="t-item t-q">
-            <p class="label">Вопрос из зала</p>
-            <p class="q">Если люди сами решили играть и делают это специально, разве это ещё понарошку?</p>
-            <p class="a">У нас «понарошку» и есть «нарочно»: специально и по общему согласию. Игра понарошку — по сути нарушение правил серьёзной системы.</p>
-            <p class="open-tag"><b>Осталось парадоксом</b></p>
+        <h3 class="label" id="rules-talk">После доклада</h3>
+        <div class="conf">
+          <div class="conf-col">
+            <section class="conf-block" aria-labelledby="rules-q1">
+              <h4 class="conf-h" id="rules-q1">Вопросы на понимание</h4>
+              <div class="t-item t-q">
+                <p class="q">Где в вашей схеме отсутствие последствий? И почему она работает?</p>
+                <p class="a">Понарошку стало отношение к правилам: их перестали воспринимать всерьёз, и последствия исчезли вместе с ними. А схема показывает, как такой мир сохраняется: каждое нарушение правил рождает новую игру.</p>
+              </div>
+            </section>
+            <section class="conf-block" aria-labelledby="rules-q2">
+              <h4 class="conf-h" id="rules-q2">Проблематизация</h4>
+              <div class="t-item t-q">
+                <p class="q">Если люди сами решили играть и делают это специально, разве это ещё понарошку?</p>
+                <p class="a">У нас «понарошку» и есть «нарочно»: специально и по общему согласию. Игра понарошку — по сути нарушение правил серьёзной системы.</p>
+                <p class="open-tag"><b>Осталось парадоксом</b></p>
+              </div>
+            </section>
           </div>
-          <blockquote class="t-item remark">
-            <p>«Нарушение правил — это красиво. Выйти из игры — значит осознать её полностью. Очень просто и очень круто».</p>
-            <span class="label">Суждение из зала</span>
-          </blockquote>
-          <blockquote class="t-item remark">
-            <p>«Если подлинность — это нарушение правил игры, не очень понятно, как это отвечает на вопрос задачи: во что надо играть?»</p>
-            <span class="label">Суждение из зала</span>
-            <p class="open-tag"><b>Осталось парадоксом</b></p>
-          </blockquote>
-          <blockquote class="t-item remark">
-            <p>«У вас получился мир идеального договора, в котором нет никаких судей, следящих за соблюдением правил. Видимо, это очень единое и взаимосвязанное общество, а подлинность — дорога к этой взаимосвязанности».</p>
-            <span class="label">Суждение из зала</span>
-            <p class="open-tag"><b>Осталось парадоксом</b><span>Кто тогда замечает нарушение?</span></p>
-          </blockquote>
-          <blockquote class="t-item remark">
-            <p>«Если всё становится понарошку и мы начинаем в это играть, рано или поздно всё равно проявляется подлинность — всплесками реальности, которые неизбежно случаются всегда, везде и со всеми. Их надо только замечать».</p>
-            <span class="label">Суждение из зала</span>
-          </blockquote>
-          <blockquote class="t-item remark">
-            <p>«Когда мы разбирали задачу, мне вспомнились Пропп и волшебные сказки. Герой нарушает запрет, переходит границу и попадает в чрево кита, в трансцендентное. Там испытания и дары. Он выходит обратно в мир с этими дарами и приходит в него уже другим, новым — настоящим героем».</p>
-            <span class="label">Суждение из группы</span>
-          </blockquote>
+          <section class="conf-block conf-col" aria-labelledby="rules-q3">
+            <h4 class="conf-h" id="rules-q3">Суждения</h4>
+            <blockquote class="t-item remark">
+              <p>«Нарушение правил — это красиво. Выйти из игры — значит осознать её полностью. Очень просто и очень круто».</p>
+              <span class="label">Из зала</span>
+            </blockquote>
+            <blockquote class="t-item remark">
+              <p>«Если подлинность — это нарушение правил игры, не очень понятно, как это отвечает на вопрос задачи: во что надо играть?»</p>
+              <span class="label">Из зала</span>
+              <p class="open-tag"><b>Осталось парадоксом</b></p>
+            </blockquote>
+            <blockquote class="t-item remark">
+              <p>«У вас получился мир идеального договора, в котором нет никаких судей, следящих за соблюдением правил. Видимо, это очень единое и взаимосвязанное общество, а подлинность — дорога к этой взаимосвязанности».</p>
+              <span class="label">Из зала</span>
+              <p class="open-tag"><b>Осталось парадоксом</b><span>Кто тогда замечает нарушение?</span></p>
+            </blockquote>
+            <blockquote class="t-item remark">
+              <p>«Если всё становится понарошку и мы начинаем в это играть, рано или поздно всё равно проявляется подлинность — всплесками реальности, которые неизбежно случаются всегда, везде и со всеми. Их надо только замечать».</p>
+              <span class="label">Из зала</span>
+            </blockquote>
+            <blockquote class="t-item remark">
+              <p>«Когда мы разбирали задачу, мне вспомнились Пропп и волшебные сказки. Герой нарушает запрет, переходит границу и попадает в чрево кита, в трансцендентное. Там испытания и дары. Он выходит обратно в мир с этими дарами и приходит в него уже другим, новым — настоящим героем».</p>
+              <span class="label">Из группы</span>
+            </blockquote>
+          </section>
         </div>
       </section>
     </div>
@@ -912,18 +997,14 @@ a:hover { text-decoration-thickness: 2px; }
     <div class="wrap">
       <header class="case-head">
         <span class="case-num" aria-hidden="true">2</span>
-        <p class="label eyebrow">Решение второй группы</p>
+        <p class="label eyebrow">Доклад 2 · группа Буран</p>
         <h2 id="gh-title">День сурка (всеобщий)</h2>
         <p class="case-sub">играть в то, что завтра существует</p>
-        <dl class="team">
-          <div><dt>Координатор</dt><dd>Буран</dd></div>
-          <div><dt>Участники</dt><dd>Спектр, Зеркало, Дима, Матвей</dd></div>
-        </dl>
       </header>
 
       <div class="spread">
         <figure class="poster">
-          <button class="poster-btn" type="button" data-full="assets/posters/groundhog-day.jpg" data-caption="Плакат второй группы «День сурка (всеобщий)»">
+          <button class="poster-btn" type="button" data-full="assets/posters/groundhog-day.jpg" data-caption="Плакат группы Буран «День сурка (всеобщий)»">
             <picture>
               <source type="image/webp" srcset="assets/posters/groundhog-day-sm.webp 1100w, assets/posters/groundhog-day.webp 2200w" sizes="(min-width: 940px) 620px, 100vw">
               <img src="assets/posters/groundhog-day-sm.jpg" srcset="assets/posters/groundhog-day-sm.jpg 1100w, assets/posters/groundhog-day.jpg 2200w" sizes="(min-width: 940px) 620px, 100vw" width="1100" height="778" alt="Плакат «День сурка (всеобщий)»: причины, рисунок двух человек, играющих в ладушки, петля времени с точками a и b, условие выхода, бесконечные итерации с откатом, во что играть и последствия." loading="lazy" decoding="async">
@@ -948,7 +1029,7 @@ a:hover { text-decoration-thickness: 2px; }
         </figure>
 
         <section class="story-wrap" aria-labelledby="gh-story">
-          <h3 class="label" id="gh-story">Как устроен этот мир</h3>
+          <h3 class="label" id="gh-story">Доклад: как устроен этот мир</h3>
           <ol class="story">
             <li class="s-step s-step--pale">
               <p class="label">Причина</p>
@@ -1027,42 +1108,50 @@ a:hover { text-decoration-thickness: 2px; }
       </figure>
 
       <section class="case-body" aria-labelledby="gh-talk">
-        <h3 class="label" id="gh-talk">Из обсуждения</h3>
-        <div class="talk">
-          <div class="t-item t-q">
-            <p class="label">Вопрос из зала</p>
-            <p class="q">Кто закольцевал время? Бог?</p>
-            <p class="a">Не бог. Скорее что-то из коллективного бессознательного и его взаимодействия с миром. Мир в некотором смысле обладает сознанием.</p>
+        <h3 class="label" id="gh-talk">После доклада</h3>
+        <div class="conf">
+          <div class="conf-col">
+            <section class="conf-block" aria-labelledby="gh-q1">
+              <h4 class="conf-h" id="gh-q1">Вопросы на понимание</h4>
+              <div class="t-item t-q">
+                <p class="q">Кто закольцевал время? Бог?</p>
+                <p class="a">Не бог. Скорее что-то из коллективного бессознательного и его взаимодействия с миром. Мир в некотором смысле обладает сознанием.</p>
+              </div>
+              <div class="t-item t-q">
+                <p class="q">А что с ментальными расстройствами?</p>
+                <p class="a">Память сохраняется и тут, так что в этом мире потихоньку будут копиться сумасшедшие.</p>
+              </div>
+            </section>
+            <section class="conf-block" aria-labelledby="gh-q2">
+              <h4 class="conf-h" id="gh-q2">Проблематизация</h4>
+              <div class="t-item t-q">
+                <p class="q">Так во что играть-то надо? И где здесь подлинность — она так и не наступает?</p>
+                <p class="a">Смена дня, когда физически всё откатывается, — ещё не завтра. Подлинность в том, что получается из игры в «завтра»: петля разрывается через последствия, и тогда они действительно происходят.</p>
+                <p class="open-tag"><b>Осталось парадоксом</b><span>Если завтра началось с игры в завтра, оно наступило по-настоящему или понарошку?</span></p>
+              </div>
+            </section>
           </div>
-          <div class="t-item t-q">
-            <p class="label">Вопрос из зала</p>
-            <p class="q">А что с ментальными расстройствами?</p>
-            <p class="a">Память сохраняется и тут, так что в этом мире потихоньку будут копиться сумасшедшие.</p>
-          </div>
-          <div class="t-item t-q">
-            <p class="label">Вопрос из зала</p>
-            <p class="q">Так во что играть-то надо? И где здесь подлинность — она так и не наступает?</p>
-            <p class="a">Смена дня, когда физически всё откатывается, — ещё не завтра. Подлинность в том, что получается из игры в «завтра»: петля разрывается через последствия, и тогда они действительно происходят.</p>
-            <p class="open-tag"><b>Осталось парадоксом</b><span>Если завтра началось с игры в завтра, оно наступило по-настоящему или понарошку?</span></p>
-          </div>
-          <blockquote class="t-item remark">
-            <p>«Люди в вашем мире могли действовать абсолютно осознанно, серьёзно и со всеми последствиями — но только в пределах этого дня. Можно было убить кого угодно, а после рестарта всё обнулится, кроме памяти».</p>
-            <span class="label">Суждение из зала</span>
-          </blockquote>
-          <blockquote class="t-item remark">
-            <p>«Когда я думала про подлинность, я говорила, что это единение с последствиями, и мне нравится, что вы это тоже вписали. Последствия на самом деле — и для тебя, и для других, и для мира. Когда ты подлинный, ты с ними связан».</p>
-            <span class="label">Суждение не из группы</span>
-          </blockquote>
-          <blockquote class="t-item remark">
-            <p>«Вы пришли к подлинности от времени понарошку, к подлинности мира как социальных правил. Но остаётся нерешённой подлинность рождения и смерти. В дне сурка умерший на следующий день снова жив, а родившегося ребёнка завтра уже нет. Никогда не заведёшь семью. Заболеешь — и никогда не умрёшь».</p>
-            <span class="label">Суждение из зала</span>
-            <p class="open-tag"><b>Осталось парадоксом</b></p>
-          </blockquote>
-          <blockquote class="t-item remark">
-            <p>«В этом мире можно быть бесконечно молодым и бесконечно накапливать мудрость. Получится поколение очень мудрых, много знающих людей».</p>
-            <span class="label">Суждение автора вопроса о расстройствах</span>
-            <p class="open-tag"><b>Осталось парадоксом</b><span>Память копит и мудрость, и безумие — чего накопится больше?</span></p>
-          </blockquote>
+          <section class="conf-block conf-col" aria-labelledby="gh-q3">
+            <h4 class="conf-h" id="gh-q3">Суждения</h4>
+            <blockquote class="t-item remark">
+              <p>«Люди в вашем мире могли действовать абсолютно осознанно, серьёзно и со всеми последствиями — но только в пределах этого дня. Можно было убить кого угодно, а после рестарта всё обнулится, кроме памяти».</p>
+              <span class="label">Из зала</span>
+            </blockquote>
+            <blockquote class="t-item remark">
+              <p>«Когда я думала про подлинность, я говорила, что это единение с последствиями, и мне нравится, что вы это тоже вписали. Последствия на самом деле — и для тебя, и для других, и для мира. Когда ты подлинный, ты с ними связан».</p>
+              <span class="label">Не из группы</span>
+            </blockquote>
+            <blockquote class="t-item remark">
+              <p>«Вы пришли к подлинности от времени понарошку, к подлинности мира как социальных правил. Но остаётся нерешённой подлинность рождения и смерти. В дне сурка умерший на следующий день снова жив, а родившегося ребёнка завтра уже нет. Никогда не заведёшь семью. Заболеешь — и никогда не умрёшь».</p>
+              <span class="label">Из зала</span>
+              <p class="open-tag"><b>Осталось парадоксом</b></p>
+            </blockquote>
+            <blockquote class="t-item remark">
+              <p>«В этом мире можно быть бесконечно молодым и бесконечно накапливать мудрость. Получится поколение очень мудрых, много знающих людей».</p>
+              <span class="label">Автор вопроса о расстройствах</span>
+              <p class="open-tag"><b>Осталось парадоксом</b><span>Память копит и мудрость, и безумие — чего накопится больше?</span></p>
+            </blockquote>
+          </section>
         </div>
       </section>
     </div>
@@ -1070,7 +1159,7 @@ a:hover { text-decoration-thickness: 2px; }
 
   <section class="finale" aria-labelledby="finale-title">
     <div class="wrap">
-      <p class="label">С плаката второй группы</p>
+      <p class="label">С плаката группы Буран</p>
       <p class="big" id="finale-title">Живём на чистовик</p>
       <p>Обе группы пришли к одному: подлинность начинается там, где у поступков снова есть последствия.</p>
     </div>
@@ -1080,7 +1169,7 @@ a:hover { text-decoration-thickness: 2px; }
 <footer class="site-foot">
   <div class="wrap label">
     <p class="about">«РанДом Культуры» — площадка культурных событий в центре Москвы: Большой Николопесковский переулок, 13, метро «Смоленская».</p>
-    <p class="about">Встречу организовала и вела <a href="https://t.me/barbrabbar" target="_blank" rel="noopener">Варвара Буран</a>. <a href="https://t.me/random_culture/1545" target="_blank" rel="noopener">Анонс встречи</a>.</p>
+    <p class="about">Встречу организовала и вела <a href="https://t.me/barbrabbar" target="_blank" rel="noopener">Варвара Буран</a>, распорядок вечера — с её слов. <a href="https://t.me/random_culture/1545" target="_blank" rel="noopener">Анонс встречи</a>.</p>
     <p>Текст восстановлен по автоматической расшифровке записи и фотографиям плакатов. Расшифровка местами путала слова, поэтому формулировки близки к сказанному, но не дословны.</p>
     <p>Фото плакатов выровнены и осветлены. У фото со встречи поправлен цвет и убраны служебные данные.</p>
     <p>Ещё одна парадоксальная задача: <a href="https://wolkill.github.io/attention-questions/" target="_blank" rel="noopener">«Задача на внимание»</a></p>
