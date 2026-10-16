@@ -212,19 +212,6 @@ a:hover { text-decoration-thickness: 2px; }
 .section-head h2 { font-weight: 800; font-size: clamp(2.1rem, 1.3rem + 3vw, 3.3rem); line-height: .98; }
 .section-head p { max-width: var(--measure); }
 
-/* Two solutions overview */
-.versions { display: grid; border-top: 2px solid var(--ink); }
-@media (min-width: 780px) { .versions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.version { display: grid; gap: 10px; align-content: start; padding: 22px 0 26px; border-bottom: 1px solid var(--rule); }
-@media (min-width: 780px) {
-  .version { padding: 26px 32px 30px; border-bottom: 0; border-left: 1px solid var(--rule); }
-  .version:first-child { padding-left: 0; border-left: 0; }
-}
-.version .num { font: 700 3.6rem/.75 var(--font-hand); color: var(--c); }
-.version h3 { font-weight: 700; font-size: 1.85rem; }
-.version p { color: var(--ink-soft); max-width: 34em; }
-.version a { font: 500 .8rem/1.3 var(--font-mono); letter-spacing: .03em; color: var(--c); }
-
 /* Minus and plus */
 .duo { display: grid; gap: 18px; align-items: start; }
 @media (min-width: 900px) { .duo { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 22px; } }
@@ -262,12 +249,11 @@ a:hover { text-decoration-thickness: 2px; }
 @media (min-width: 900px) { .catalyst svg { transform: none; margin: 4px 0; } }
 .catalyst svg path { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .catalyst .label { color: var(--m-green); font-size: .7rem; }
-.duo-note { margin-top: 18px; max-width: var(--measure); }
 
 /* Steps */
 .steps { padding: 0; list-style: none; display: grid; gap: 22px; counter-reset: step; }
 @media (min-width: 700px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; } }
-@media (min-width: 1000px) { .steps--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } .steps--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .steps--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 .step { display: grid; gap: 8px; align-content: start; padding-top: 14px; border-top: 2px solid var(--c, var(--ink)); }
 .step h3 { font-weight: 700; font-size: 1.5rem; }
 .step p:not(.label) { font-size: .98rem; }
@@ -303,10 +289,6 @@ a:hover { text-decoration-thickness: 2px; }
 .case .eyebrow { color: var(--accent); }
 .case h2 { font-weight: 800; font-size: clamp(2.4rem, 1.1rem + 5vw, 4.7rem); line-height: .92; }
 .case-sub { font: 500 .95rem/1.3 var(--font-mono); color: var(--ink-soft); }
-.case-lead {
-  max-width: 36em; margin-bottom: clamp(30px, 5vw, 52px);
-  font-size: clamp(1.15rem, 1rem + .5vw, 1.36rem); line-height: 1.5;
-}
 .spread { display: grid; gap: clamp(26px, 4vw, 48px); align-items: start; }
 @media (min-width: 940px) { .spread { grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr); } }
 
@@ -338,18 +320,13 @@ a:hover { text-decoration-thickness: 2px; }
   border: 1px solid var(--rule);
 }
 .hand { font: 600 1.45rem/1.18 var(--font-hand); color: var(--accent); }
-.hand-title { font-size: 2rem; }
 .pale, .hand.pale { color: var(--m-pink); }
 .green, .hand.green { color: var(--m-green); }
 .transcript .note { font-family: var(--font-text); font-size: .85rem; margin-top: 3px; }
-.tgroup { display: grid; gap: 6px; }
-.tgroup > .label { font-size: .7rem; }
 .tlist { padding: 0; list-style: none; display: grid; gap: 3px; }
 .tlist li { padding-left: 1.1em; text-indent: -1.1em; }
 .tlist li::before { content: "↳ "; }
-.tlist.plain li { padding-left: 0; text-indent: 0; }
-.tlist.plain li::before { content: none; }
-.int { display: inline-flex; align-items: center; gap: 1px; font-family: var(--font-text); font-weight: 400; }
+.int { display: inline-flex; align-items: center; gap: 1px; text-indent: 0; font-family: var(--font-text); font-weight: 400; }
 .int .lim { display: inline-grid; font-size: .55em; line-height: 1; font-style: italic; }
 .u2 { text-decoration: underline double; text-underline-offset: .2em; text-decoration-thickness: 1px; }
 
@@ -359,54 +336,64 @@ a:hover { text-decoration-thickness: 2px; }
 .figure figcaption { max-width: var(--measure); font-size: .95rem; color: var(--ink-soft); }
 .fig-title { margin-bottom: 18px; }
 
-/* Cycle (solution 1) */
-.cycle { display: grid; gap: 40px; }
-@media (min-width: 900px) { .cycle { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 44px; } }
-.c-node {
+/* Poster text, folded under the poster */
+.poster-text { border: 1px solid var(--rule); background: var(--sheet); }
+.poster-text summary {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 11px 16px;
+  font: 500 .75rem/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft);
+  cursor: pointer; list-style: none;
+}
+.poster-text summary::-webkit-details-marker { display: none; }
+.poster-text summary::after { content: "+"; font-size: 1.15rem; line-height: 1; color: var(--accent); }
+.poster-text[open] summary::after { content: "−"; }
+.poster-text summary:hover { color: var(--ink); }
+.poster-text .transcript { gap: 12px; padding: 2px 16px 16px; border: 0; background: none; }
+.poster-text .tlist { gap: 6px; }
+.poster-text .tlist li { font-size: 1.3rem; }
+@media (min-width: 940px) { .poster:has(.poster-text[open]) { position: static; } }
+
+/* The world, told once: story steps beside the poster */
+.story-wrap { display: grid; gap: 16px; align-content: start; }
+.story { padding: 0; list-style: none; display: grid; gap: 36px; }
+.s-step {
   position: relative;
-  display: grid; gap: 6px; align-content: start;
-  padding: 14px 16px 16px;
-  border: 2px solid var(--accent); border-radius: 18px;
+  display: grid; gap: 6px;
+  padding: 14px 18px 16px;
   background: var(--sheet);
+  border: 2px solid var(--accent); border-radius: 18px;
 }
-.c-node .hand { font-size: 1.65rem; line-height: 1.05; }
-.c-node p { font-size: .88rem; line-height: 1.45; color: var(--ink-soft); }
-.c-node--pale { border-style: dashed; border-color: var(--m-pink); }
-.c-node--pale .hand { color: var(--m-pink); }
-.c-node--hot { background: color-mix(in srgb, var(--accent) 12%, var(--sheet)); }
-.c-node--end { background: var(--accent); }
-.c-node--end .hand, .c-node--end p { color: var(--on-accent); }
-.c-node:not(.c-node--end)::after {
+.s-step .label, .s-return .label { font-size: .68rem; color: var(--accent); }
+.s-step .hand { font-size: 1.75rem; line-height: 1.05; }
+.s-step > p:not(.hand):not(.label), .s-step .tlist li, .s-return p:not(.hand):not(.label) { font-size: .97rem; line-height: 1.55; }
+.s-step .tlist { gap: 6px; margin-top: 2px; }
+.s-step::after {
   content: "↓";
-  position: absolute; left: 50%; bottom: -36px; transform: translateX(-50%);
-  font: 700 1.9rem/1 var(--font-hand); color: var(--accent);
+  position: absolute; left: 50%; bottom: -34px; transform: translateX(-50%);
+  font: 700 1.8rem/1 var(--font-hand); color: var(--accent);
 }
-.c-return {
-  position: relative;
-  padding: 12px 16px;
-  border: 2px dashed var(--accent); border-radius: 14px;
-  color: var(--accent);
+.s-step:has(+ .s-alt)::after { content: "или"; bottom: -31px; font-size: 1.35rem; }
+.s-step--pale { border-style: dashed; border-color: var(--m-pink); }
+.s-step--pale .hand, .s-step--pale .label { color: var(--m-pink); }
+.s-step--hot { background: color-mix(in srgb, var(--accent) 12%, var(--sheet)); }
+.s-step--end { background: var(--accent); }
+.s-step--end .hand, .s-step--end p, .s-step--end .label { color: var(--on-accent); }
+.s-return {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 18px;
+  border: 2px dashed var(--accent); border-radius: 18px;
 }
-.c-return .hand { font-size: 1.45rem; }
-.c-return .back { font-family: var(--font-text); font-size: .9rem; color: var(--ink-soft); }
-@media (min-width: 900px) {
-  .c-node:not(.c-node--end)::after { content: "→"; left: auto; right: -38px; bottom: auto; top: 50%; transform: translateY(-50%); }
-  .c-return {
-    grid-column: 2 / 5;
-    height: 54px; margin: 0 calc((100% - 88px) / 6);
-    padding: 0;
-    border: 2px solid var(--accent); border-top: 0; border-radius: 0 0 20px 20px;
-  }
-  .c-return::before {
-    content: ""; position: absolute; left: -8px; top: -2px;
-    border: 7px solid transparent; border-bottom: 11px solid var(--accent); border-top: 0;
-  }
-  .c-return .text {
-    position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 55%);
-    padding: 0 12px; background: var(--sheet); white-space: nowrap;
-  }
-  .c-return .back { display: none; }
+.s-return > div { display: grid; gap: 6px; }
+.s-return .hand { font-size: 1.65rem; line-height: 1.05; }
+.groundhog { flex: none; display: grid; gap: 4px; justify-items: center; width: 112px; text-align: center; }
+.groundhog .doodle {
+  width: 100%; aspect-ratio: 364 / 420;
+  background: var(--m-green);
+  -webkit-mask: url("assets/groundhog.png") center / contain no-repeat;
+  mask: url("assets/groundhog.png") center / contain no-repeat;
 }
+.groundhog .sig { font: 600 1.05rem/1.1 var(--font-hand); color: var(--m-blue); }
+@media (max-width: 380px) { .groundhog { width: 88px; } }
 
 /* Speed ladder (solution 1) */
 .speed { display: grid; gap: 14px; padding: 0; list-style: none; }
@@ -458,39 +445,26 @@ a:hover { text-decoration-thickness: 2px; }
 .loop-btn[disabled] { opacity: .55; cursor: default; background: transparent; color: var(--accent); }
 .loop-status { font-size: .95rem; min-height: 3em; }
 
-/* Report and discussion */
-.case-body { display: grid; gap: clamp(40px, 6vw, 64px); margin-top: clamp(44px, 7vw, 76px); }
-@media (min-width: 1000px) { .case-body { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); } }
-.block { display: grid; gap: 22px; align-content: start; }
-.points { padding: 0; list-style: none; display: grid; gap: 18px; }
-.points > li { position: relative; padding-left: 1.6em; }
-.points > li::before { content: ""; position: absolute; left: 0; top: .78em; width: .95em; border-top: 2px solid var(--accent); }
-.qa { display: grid; gap: 24px; }
-.q { font: 700 1.25rem/1.22 var(--font-display); }
+/* Discussion: questions and judgments in one stream; open ones are tagged in place */
+.case-body { display: grid; gap: 22px; margin-top: clamp(44px, 7vw, 76px); }
+.talk { columns: 2 340px; column-gap: 44px; }
+.t-item { break-inside: avoid; margin: 0 0 28px; }
+.t-q { padding-left: 16px; border-left: 3px solid var(--ink); }
+.t-q > .label { font-size: .7rem; }
+.q { margin-top: 4px; font: 700 1.25rem/1.22 var(--font-display); }
 .a { margin-top: 6px; }
 .remark { padding-left: 16px; border-left: 3px solid var(--accent); font-style: italic; }
-.remark .label { display: block; margin-top: 6px; font-style: normal; font-size: .7rem; }
-.sub-head { margin-top: 10px; padding-top: 18px; border-top: 1px dashed var(--rule); }
-
-/* Paradoxes */
-.paradox-layout { display: grid; gap: clamp(30px, 5vw, 56px); align-items: start; }
-@media (min-width: 1000px) { .paradox-layout { grid-template-columns: minmax(0, 1fr) 280px; } }
-.paradoxes { padding: 0; list-style: none; display: grid; border-top: 2px solid var(--ink); }
-@media (min-width: 780px) { .paradoxes { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; } }
-.paradox { display: grid; gap: 6px; align-content: start; padding: 20px 0 22px; border-bottom: 1px solid var(--rule); }
-.paradox h3 { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.5rem; }
-.tags { display: inline-flex; gap: 4px; }
-.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 4px; }
-.legend span { display: inline-flex; align-items: center; gap: 7px; }
-.groundhog { display: grid; gap: 10px; justify-items: center; text-align: center; }
-.groundhog .doodle {
-  width: min(220px, 60vw); aspect-ratio: 364 / 420;
-  background: var(--m-green);
-  -webkit-mask: url("assets/groundhog.png") center / contain no-repeat;
-  mask: url("assets/groundhog.png") center / contain no-repeat;
+.remark > .label { display: block; margin-top: 6px; font-style: normal; font-size: .7rem; }
+.open-tag { display: grid; gap: 4px; justify-items: start; margin-top: 10px; font-style: normal; }
+.open-tag b {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 9px 3px;
+  border: 1.5px solid var(--m-pink); border-radius: 999px;
+  color: var(--m-pink);
+  font: 500 .66rem/1.2 var(--font-mono); letter-spacing: .08em; text-transform: uppercase;
 }
-.groundhog .sig { font: 600 1.45rem/1.15 var(--font-hand); color: var(--m-blue); }
-.groundhog figcaption { font: 400 .8rem/1.45 var(--font-mono); color: var(--ink-soft); max-width: 26em; }
+.open-tag b::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.open-tag span { font: 600 1.3rem/1.2 var(--font-hand); color: var(--m-pink); }
 
 /* Finale */
 .finale { padding-block: clamp(64px, 10vw, 128px); border-top: 1px solid var(--rule); text-align: center; }
@@ -567,7 +541,7 @@ a:hover { text-decoration-thickness: 2px; }
       <div class="hero-text">
         <p class="label">Отчёт о встрече · <span class="nowrap">13 октября 2026</span> · <span class="nowrap">18:30–21:00</span> · <span class="nowrap">РанДом Культуры</span></p>
         <h1 id="title"><span class="line">Мир</span> <span class="line"><span class="circled"><span class="hollow">понарошку</span><svg viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M24 70 C10 40 70 10 160 9 C250 8 296 28 292 52 C288 80 210 95 140 93 C70 91 14 80 16 56 C18 38 50 24 98 18"/></svg></span></span></h1>
-        <p class="lead">Задача парадоксальная: игра сама по себе понарошку, а искать с её помощью нужно подлинность. Две группы придумали два мира. В первом подлинность проступает, когда нарушают правила игры. Во втором человечество застряло во всеобщем дне сурка и выбирается из него, играя в то, что завтра существует.</p>
+        <p class="lead">Две группы придумали два мира. В первом подлинность проступает, когда нарушают правила игры. Во втором человечество застряло во всеобщем дне сурка и выбирается из него, играя в то, что завтра существует.</p>
         <ul class="toc" aria-label="Разделы">
           <li><a href="#task">Условие</a></li>
           <li><a href="#words">Минус и плюс</a></li>
@@ -575,7 +549,6 @@ a:hover { text-decoration-thickness: 2px; }
           <li><a href="#photos">Фото</a></li>
           <li><a href="#rules"><span class="dot" style="--c: var(--m-red)"></span>Нарушение правил</a></li>
           <li><a href="#groundhog"><span class="dot" style="--c: var(--m-blue)"></span>День сурка</a></li>
-          <li><a href="#paradoxes">Парадоксы</a></li>
         </ul>
       </div>
 
@@ -590,10 +563,8 @@ a:hover { text-decoration-thickness: 2px; }
             <h2>Придумай мир, в котором всё стало понарошку</h2>
             <p class="card-q">Во что нужно играть, чтобы обрести подлинность?</p>
             <dl>
-              <dt>Мир</dt><dd>любой, но в нём всё понарошку</dd>
-              <dt>Ход</dt><dd>придумать игру</dd>
-              <dt>Цель</dt><dd>обрести подлинность</dd>
               <dt>Подвох</dt><dd>игра — тоже понарошку</dd>
+              <dt>Ответ</dt><dd>заранее не известен</dd>
               <dt>Игроки</dt><dd>две группы</dd>
             </dl>
           </div>
@@ -604,36 +575,12 @@ a:hover { text-decoration-thickness: 2px; }
     </div>
   </section>
 
-  <section class="section" aria-labelledby="versions-title">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="label">Решения</p>
-        <h2 id="versions-title">Два мира и две игры</h2>
-        <p>Это задача открытого типа: точной формулировки и готового ответа у неё нет. Поэтому каждая группа сама решала, как устроен мир понарошку и что в нём значит подлинность.</p>
-      </div>
-      <div class="versions">
-        <div class="version" style="--c: var(--m-red)">
-          <span class="num" aria-hidden="true">1</span>
-          <h3>Игра в нарушение правил</h3>
-          <p>Правила перестали воспринимать всерьёз, и вместе с ними исчезли последствия. Подлинность проступает, когда правила нарушают: так выясняется, во что на самом деле шла игра.</p>
-          <a href="#rules">Решение группы</a>
-        </div>
-        <div class="version" style="--c: var(--m-blue)">
-          <span class="num" aria-hidden="true">2</span>
-          <h3>Всеобщий день сурка</h3>
-          <p>Мир закольцевал один день для всех, а память сохраняется у каждого. Выход — играть в то, что завтра существует и у поступков есть последствия.</p>
-          <a href="#groundhog">Решение группы</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section" id="words" aria-labelledby="words-title">
     <div class="wrap">
       <div class="section-head">
         <p class="label">Два слова задачи</p>
         <h2 id="words-title">Минус и плюс</h2>
-        <p>Первая группа начала с того, что разобрала оба слова задачи. Получилась схема: понарошку — это минус, подлинность — плюс, а от одного к другому ведёт игра, которая работает как катализатор.</p>
+        <p>Первая группа начала с того, что разобрала оба слова задачи.</p>
       </div>
       <div class="duo">
         <div class="pole pole--minus">
@@ -665,15 +612,14 @@ a:hover { text-decoration-thickness: 2px; }
   <section class="section" id="format" aria-labelledby="format-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="label">18:30–21:00</p>
+        <p class="label">Формат</p>
         <h2 id="format-title">Как шёл разбор</h2>
-        <p>Участники разделились на группы, у каждой были модератор, маркеры и большой лист для плаката. Потом группы встретились на конференции: рассказали свои решения и задавали друг другу вопросы. Вела встречу <a href="https://t.me/barbrabbar" target="_blank" rel="noopener">Варвара Буран</a>.</p>
       </div>
       <ol class="steps steps--5">
         <li class="step">
           <p class="label">Шаг 1</p>
           <h3>Плакат</h3>
-          <p>Группа вырабатывает позицию и рисует итоговый плакат.</p>
+          <p>Каждая группа с модератором вырабатывает позицию и рисует её маркерами на большом листе.</p>
         </li>
         <li class="step">
           <p class="label">Шаг 2</p>
@@ -693,7 +639,7 @@ a:hover { text-decoration-thickness: 2px; }
         <li class="step">
           <p class="label">Шаг 5</p>
           <h3>Суждения</h3>
-          <p>Высказывания на развитие идеи. Спорить с ними нельзя.</p>
+          <p>Высказывания на развитие идеи.</p>
         </li>
       </ol>
       <blockquote class="step-quote">
@@ -708,7 +654,7 @@ a:hover { text-decoration-thickness: 2px; }
       <div class="section-head">
         <p class="label">Фотографии</p>
         <h2 id="photos-title">Как это было</h2>
-        <p>Вечер в «РанДоме Культуры»: доклады обеих групп, слушатели и разговоры на улице после встречи. Нажмите на фото, чтобы открыть его крупно.</p>
+        <p>Нажмите на фото, чтобы открыть его крупно.</p>
       </div>
       <ul class="gallery">
         <li>
@@ -823,7 +769,6 @@ a:hover { text-decoration-thickness: 2px; }
         <h2 id="rules-title">Игра в нарушение правил</h2>
         <p class="case-sub">понарошку → игра → подлинность</p>
       </header>
-      <p class="case-lead">Мир стал понарошку, потому что люди перестали всерьёз относиться к правилам, а вместе с ними исчезли и последствия. Игра работает как катализатор. В любой игре есть правила, рано или поздно их нарушают, и в момент нарушения проступает подлинность — уже с новыми последствиями.</p>
 
       <div class="spread">
         <figure class="poster">
@@ -835,94 +780,64 @@ a:hover { text-decoration-thickness: 2px; }
             <span class="zoom">Крупнее</span>
           </button>
           <figcaption>Итоговый плакат группы. Нижний край на фото обрезан</figcaption>
+          <details class="poster-text">
+            <summary>Что написано на плакате</summary>
+            <div class="transcript">
+              <ul class="tlist hand">
+                <li>Понарошку — 1) отсутствие последствий 2) искажение настоящего 3) отвержение <span class="u2">подлинности</span></li>
+                <li>(−) «понарошку» ⟹ кат. игра ⟹ (+) «подлинность»</li>
+                <li>интерес · аллергия на «понарошку»</li>
+                <li>скорость</li>
+                <li><span class="pale">стало понарошку</span> → игра с правилами → игра в нарушение правил → «0» → подлинность <span class="pale">«на самом деле»</span> с новыми последствиями → <span class="green">или коррект. правил</span></li>
+                <li>Подлинность: 1) соответствие реальности; 2) естественность 3) всамделишность</li>
+                <li>понарошку ↓ игра ↓ подлинность</li>
+                <li><span class="green">Это сурок</span>: 1) всамделишний 2) настоящий</li>
+              </ul>
+              <p class="note">Рисунки: лица в красной сыпи рядом с аллергией, бегун, машина и самолёт рядом со скоростью, зелёный сурок. «Кат.» — катализатор. Под «Игрой с правилами» бледно проступает «понарошку».</p>
+            </div>
+          </details>
         </figure>
 
-        <aside class="transcript" aria-label="Что написано на плакате">
-          <p class="label">Что на плакате</p>
-          <div class="tgroup">
-            <p class="hand hand-title">Понарошку —</p>
-            <ul class="tlist plain hand">
-              <li>1) Отсутствие последствий</li>
-              <li>2) Искажение настоящего</li>
-              <li>3) Отвержение <span class="u2">подлинности</span></li>
-            </ul>
-          </div>
-          <div class="tgroup">
-            <p class="label">Схема</p>
-            <p class="hand">(−) «понарошку» ⟹ кат. игра ⟹ (+) «подлинность»</p>
-            <p class="note">«Кат.» — катализатор. Стрелка нарисована зелёным.</p>
-          </div>
-          <div class="tgroup">
-            <p class="label">Мотивы</p>
-            <ul class="tlist hand">
-              <li>интерес</li>
-              <li>аллергия на «понарошку»</li>
-            </ul>
-            <p class="note">Стрелка от аллергии ведёт к двум лицам в красной сыпи.</p>
-          </div>
-          <div>
-            <p class="hand">Скорость</p>
-            <p class="note">Рисунок: бегун, за ним машина, за ней самолёт.</p>
-          </div>
-          <div class="tgroup">
-            <p class="label">Цикл</p>
-            <ul class="tlist hand">
-              <li><span class="pale">стало понарошку</span> → игра с правилами</li>
-              <li>игра с правилами → игра в нарушение правил</li>
-              <li>→ подлинность <span class="pale">«на самом деле»</span> с новыми последствиями</li>
-              <li><span class="green">или коррект. правил</span> → снова игра с правилами</li>
-            </ul>
-            <p class="note">В середине цикла — овал с «0» и расходящиеся дуги. Под «Игрой с правилами» бледно проступает «понарошку».</p>
-          </div>
-          <div class="tgroup">
-            <p class="label">Подлинность</p>
-            <ul class="tlist plain hand">
-              <li>1) соответствие реальности;</li>
-              <li>2) естественность</li>
-              <li>3) всамделишность</li>
-            </ul>
-          </div>
-          <p class="hand">понарошку ↓ игра ↓ подлинность</p>
-          <div class="tgroup">
-            <p class="hand green">Это сурок</p>
-            <ul class="tlist plain hand">
-              <li>1) всамделишний</li>
-              <li>2) настоящий</li>
-            </ul>
-            <p class="note">Подпись под зелёным рисунком сурка.</p>
-          </div>
-        </aside>
+        <section class="story-wrap" aria-labelledby="rules-story">
+          <h3 class="label" id="rules-story">Как устроен этот мир</h3>
+          <ol class="story">
+            <li class="s-step s-step--pale">
+              <p class="hand">Стало понарошку</p>
+              <p>Общество жило по первичным правилам, заданным на старте, и всё было слишком серьёзно: цивилизация слишком масштабная, а всё социальное держится на договорённостях. Серьёзность надоела, люди начали играть, и правила перестали воспринимать всерьёз. Вместе с ними исчезли последствия.</p>
+            </li>
+            <li class="s-step">
+              <p class="hand">Игра с правилами</p>
+              <p>Мир устроен как детский двор. Катаются на велосипедах, играют в войнушку — и всегда появляется небольшой список правил: в войнушку играют деревянными палками, а не железками.</p>
+            </li>
+            <li class="s-step s-step--hot">
+              <p class="hand">Игра в нарушение правил</p>
+              <p>Рано или поздно правила нарушают: случайно, когда кто-то нашёл лазейку, или нарочно. О мотивах в группе спорили.</p>
+              <ul class="tlist">
+                <li>Аллергия на понарошку. Идёшь играть в волейбол — и вдруг бац, ходишь по потолку. Жить так неудобно, и люди вынуждены искать то, что провоцирует игру.</li>
+                <li>Интерес. В мире понарошку скучно, и хочется узнать, что будет, если нарушить правила.</li>
+              </ul>
+            </li>
+            <li class="s-step s-step--end">
+              <p class="hand">Подлинность «на самом деле»</p>
+              <p>Кто-то поступил нечестно, и игроки начинают драться, уже совсем не по правилам. Тут и возвращаются последствия: недаром у нас говорят «произошло нарушение». Если правила нарушены так, что играть по ним невозможно, игроки выходят за пределы своей игры — к подлинности.</p>
+            </li>
+            <li class="s-return">
+              <div>
+                <p class="hand">↺ Коррекция правил</p>
+                <p>Выясняется, что можно играть в другую игру. Правила поправляют, и всё начинается снова, как день сурка. Поэтому на плакате и нарисован сурок.</p>
+              </div>
+              <figure class="groundhog">
+                <div class="doodle" role="img" aria-label="Зелёный рисунок сурка с подписью «Это сурок»"></div>
+                <figcaption class="sig">1) всамделишний<br>2) настоящий</figcaption>
+              </figure>
+            </li>
+          </ol>
+        </section>
       </div>
 
       <figure class="figure">
         <div class="figure-box">
-          <p class="label fig-title">Цикл с плаката</p>
-          <div class="cycle" role="group" aria-label="Цикл: стало понарошку, игра с правилами, игра в нарушение правил, подлинность на самом деле; затем коррекция правил и снова игра с правилами">
-            <div class="c-node c-node--pale">
-              <p class="hand">Стало понарошку</p>
-              <p>Правила не воспринимают всерьёз, последствий нет.</p>
-            </div>
-            <div class="c-node">
-              <p class="hand">Игра с правилами</p>
-              <p>Как в любой детской игре: небольшой список правил.</p>
-            </div>
-            <div class="c-node c-node--hot">
-              <p class="hand">Игра в нарушение правил</p>
-              <p>Случайно или нарочно. Из интереса или из-за аллергии на понарошку.</p>
-            </div>
-            <div class="c-node c-node--end">
-              <p class="hand">Подлинность «на самом деле»</p>
-              <p>С новыми последствиями.</p>
-            </div>
-            <p class="c-return"><span class="text hand">↺ или коррекция правил</span> <span class="back">— и снова игра с правилами</span></p>
-          </div>
-        </div>
-        <figcaption>Схема перерисована с плаката. Это цикл: в любой момент у мира есть какие-то правила и их нарушение. Когда правила нарушают так сильно, что играть по ним уже невозможно, игроки выходят за пределы своей игры. Там и есть подлинность, а потом правила корректируют и начинается новая игра.</figcaption>
-      </figure>
-
-      <figure class="figure">
-        <div class="figure-box">
-          <p class="label fig-title">Пример из доклада</p>
+          <p class="label fig-title">Пример с плаката: «Скорость»</p>
           <ol class="speed">
             <li>
               <svg viewBox="0 0 64 52" aria-hidden="true"><circle cx="40" cy="9" r="5"/><path d="M38 15 L32 30 M37 18 L28 21 M37 18 L44 23 L49 19 M32 30 L40 36 L40 47 M32 30 L25 39 L16 39"/><line x1="3" y1="20" x2="16" y2="20"/><line x1="6" y1="29" x2="19" y2="29"/><line x1="3" y1="38" x2="11" y2="38"/></svg>
@@ -946,64 +861,41 @@ a:hover { text-decoration-thickness: 2px; }
             </li>
           </ol>
         </div>
-        <figcaption>На плакате этот пример нарисован: бегун, машина, самолёт и подпись «Скорость».</figcaption>
       </figure>
 
-      <div class="case-body">
-        <section class="block" aria-labelledby="rules-report">
-          <h3 class="label" id="rules-report">Главное из доклада</h3>
-          <ul class="points">
-            <li>Мир такой же, как наш, марсиан придумывать не стали. Понарошку в нём стало отношение к правилам: их перестали воспринимать всерьёз. Поэтому исчезли и последствия, которые эти правила предполагали.</li>
-            <li>Одна из версий, как так вышло. Общество жило по первичным правилам, заданным на старте, и всё было слишком серьёзно: цивилизация слишком масштабная, а всё социальное держится на договорённостях. Ключевое слово — «надоело». Серьёзность надоела, люди начали играть, и им стало весело.</li>
-            <li>Задача — отойти от понарошку. Мотивов два, и тут мнения в группе разделились.
-              <ul class="tlist" style="margin-top: 10px; gap: 8px;">
-                <li>Аллергия на понарошку. Идёшь играть в волейбол — и вдруг бац, ходишь по потолку. Жить так неудобно, люди страдают и вынуждены искать то, что провоцирует игру.</li>
-                <li>Интерес. В мире понарошку скучно, и становится интересно, что будет, если нарушить правила.</li>
-              </ul>
-              Играть можно добровольно, потому что хочется, а можно вынужденно.
-            </li>
-            <li>Нарушение правил бывает случайным, когда кто-то просто нашёл лазейку, и нарочным. Когда правила нарушены так сильно, что играть по ним уже невозможно, игроки выходят за пределы своей игры. Выясняется, что можно играть в другую игру, правила корректируются, и начинается новая.</li>
-            <li>Это цикл, как в любых детских играх. Катаются на велосипедах, играют в войнушку — и всегда появляется небольшой список правил: в войнушку играют деревянными палками, а не железками.</li>
-            <li>Когда кто-то поступил нечестно по мнению других, игроки могут начать драться — и тут уже все действуют совсем не по правилам. Именно здесь возвращаются последствия. Недаром в нашей реальности есть выражение «произошло нарушение».</li>
-            <li>Цикл повторяется снова и снова, как день сурка. Поэтому на плакате и появился сурок.</li>
-          </ul>
-        </section>
-
-        <section class="block" aria-labelledby="rules-qa">
-          <h3 class="label" id="rules-qa">Из обсуждения</h3>
-          <div class="qa">
-            <div>
-              <p class="q">Где в вашей схеме отсутствие последствий? И почему она работает?</p>
-              <p class="a">Мир, похожий на наш, стал понарошку: изменилось отношение к социальным правилам. Раз правила не воспринимают всерьёз, исчезли и последствия. А схема показывает, как такой мир сохраняется: каждый раз, когда находится способ обойти правила, появляется новая игра. Последствия возвращаются в момент нарушения.</p>
-            </div>
-            <div>
-              <p class="q">Если люди сами решили играть и делают это специально, разве это ещё понарошку?</p>
-              <p class="a">У нас «понарошку» и есть «нарочно»: специально и по общему согласию. Игра понарошку — по сути нарушение правил серьёзной системы.</p>
-            </div>
-            <p class="label sub-head">Суждения</p>
-            <blockquote class="remark">
-              <p>«Нарушение правил — это красиво. Выйти из игры — значит осознать её полностью. Очень просто и очень круто».</p>
-              <span class="label">Суждение из зала</span>
-            </blockquote>
-            <blockquote class="remark">
-              <p>«Если подлинность — это нарушение правил игры, не очень понятно, как это отвечает на вопрос задачи: во что надо играть?»</p>
-              <span class="label">Суждение из зала</span>
-            </blockquote>
-            <blockquote class="remark">
-              <p>«У вас получился мир идеального договора, в котором нет никаких судей, следящих за соблюдением правил. Видимо, это очень единое и взаимосвязанное общество, а подлинность — дорога к этой взаимосвязанности».</p>
-              <span class="label">Суждение из зала</span>
-            </blockquote>
-            <blockquote class="remark">
-              <p>«Если всё становится понарошку и мы начинаем в это играть, рано или поздно всё равно проявляется подлинность — всплесками реальности, которые неизбежно случаются всегда, везде и со всеми. Их надо только замечать».</p>
-              <span class="label">Суждение из зала</span>
-            </blockquote>
-            <blockquote class="remark">
-              <p>«Когда мы разбирали задачу, мне вспомнились Пропп и волшебные сказки. Герой нарушает запрет, переходит границу и попадает в чрево кита, в трансцендентное. Там испытания и дары. Он выходит обратно в мир с этими дарами и приходит в него уже другим, новым — настоящим героем».</p>
-              <span class="label">Суждение из группы</span>
-            </blockquote>
+      <section class="case-body" aria-labelledby="rules-talk">
+        <h3 class="label" id="rules-talk">Из обсуждения</h3>
+        <div class="talk">
+          <div class="t-item t-q">
+            <p class="label">Вопрос из зала</p>
+            <p class="q">Если люди сами решили играть и делают это специально, разве это ещё понарошку?</p>
+            <p class="a">У нас «понарошку» и есть «нарочно»: специально и по общему согласию. Игра понарошку — по сути нарушение правил серьёзной системы.</p>
+            <p class="open-tag"><b>Осталось парадоксом</b></p>
           </div>
-        </section>
-      </div>
+          <blockquote class="t-item remark">
+            <p>«Нарушение правил — это красиво. Выйти из игры — значит осознать её полностью. Очень просто и очень круто».</p>
+            <span class="label">Суждение из зала</span>
+          </blockquote>
+          <blockquote class="t-item remark">
+            <p>«Если подлинность — это нарушение правил игры, не очень понятно, как это отвечает на вопрос задачи: во что надо играть?»</p>
+            <span class="label">Суждение из зала</span>
+            <p class="open-tag"><b>Осталось парадоксом</b></p>
+          </blockquote>
+          <blockquote class="t-item remark">
+            <p>«У вас получился мир идеального договора, в котором нет никаких судей, следящих за соблюдением правил. Видимо, это очень единое и взаимосвязанное общество, а подлинность — дорога к этой взаимосвязанности».</p>
+            <span class="label">Суждение из зала</span>
+            <p class="open-tag"><b>Осталось парадоксом</b><span>Кто тогда замечает нарушение?</span></p>
+          </blockquote>
+          <blockquote class="t-item remark">
+            <p>«Если всё становится понарошку и мы начинаем в это играть, рано или поздно всё равно проявляется подлинность — всплесками реальности, которые неизбежно случаются всегда, везде и со всеми. Их надо только замечать».</p>
+            <span class="label">Суждение из зала</span>
+          </blockquote>
+          <blockquote class="t-item remark">
+            <p>«Когда мы разбирали задачу, мне вспомнились Пропп и волшебные сказки. Герой нарушает запрет, переходит границу и попадает в чрево кита, в трансцендентное. Там испытания и дары. Он выходит обратно в мир с этими дарами и приходит в него уже другим, новым — настоящим героем».</p>
+            <span class="label">Суждение из группы</span>
+          </blockquote>
+        </div>
+      </section>
     </div>
   </article>
 
@@ -1016,7 +908,6 @@ a:hover { text-decoration-thickness: 2px; }
         <h2 id="gh-title">День сурка (всеобщий)</h2>
         <p class="case-sub">играть в то, что завтра существует</p>
       </header>
-      <p class="case-lead">Люди перестали обращать внимание на последствия, и мир закольцевал время: один и тот же день для всех. Память при этом сохраняется у каждого. Выход — игра, в которой у поступков есть последствия даже при бесконечном числе повторов, а «завтра» существует.</p>
 
       <div class="spread">
         <figure class="poster">
@@ -1028,225 +919,143 @@ a:hover { text-decoration-thickness: 2px; }
             <span class="zoom">Крупнее</span>
           </button>
           <figcaption>Итоговый плакат группы</figcaption>
+          <details class="poster-text">
+            <summary>Что написано на плакате</summary>
+            <div class="transcript">
+              <ul class="tlist hand">
+                <li>День сурка (всеобщий)</li>
+                <li>Причины: люди перестали обращать внимание на последствия, начали делать на автоматизме; перестали доводить до конца</li>
+                <li>Условие выхода: учёт <span class="int">∮<span class="lim"><i>b</i><i>a</i></span></span> реальности в глубине рекурсии</li>
+                <li>Событийно: бесконечное [число] итераций с откатом физ. состояния до 0 даты. После n<sup>∞</sup> раз люди стали искать выход</li>
+                <li>Как? ⟹ Во что играть: есть последствия даже при ∞ итераций; «завтра» — существует</li>
+                <li class="pale">Последствия: сохраняем; живём на чистовик</li>
+              </ul>
+              <p class="note">Рисунки: двое играют в ладушки, подпись «вместо того чтобы делать детей»; петля между точками a и b на розовой стрелке. Первое слово условия выхода неразборчиво, похоже на «учёт»; ∮ — интеграл по замкнутому контуру от a до b. «Последствия» написаны бледно-розовым.</p>
+            </div>
+          </details>
         </figure>
 
-        <aside class="transcript" aria-label="Что написано на плакате">
-          <p class="label">Что на плакате</p>
-          <p class="hand hand-title">День сурка (всеобщий)</p>
-          <div class="tgroup">
-            <p class="label">Причины</p>
-            <ul class="tlist hand">
-              <li>люди перестали обращать внимание на последствия, начали делать на автоматизме</li>
-              <li>перестали доводить до конца</li>
-            </ul>
-            <p class="note">Рядом рисунок: двое сидят друг напротив друга и играют в ладушки. Подпись: «вместо того чтобы делать детей».</p>
-          </div>
-          <p class="note">Через весь плакат идёт розовая стрелка, на ней петля между точками a и b.</p>
-          <div class="tgroup">
-            <p class="label">Событийно</p>
-            <ul class="tlist hand">
-              <li>бесконечное [число] итераций с откатом физ. состояния до 0 даты</li>
-              <li>после n<sup>∞</sup> раз люди стали искать выход</li>
-            </ul>
-          </div>
-          <div class="tgroup">
-            <p class="label">Как? ⟹ Во что играть</p>
-            <ul class="tlist hand">
-              <li>есть последствия даже при ∞ итераций</li>
-              <li>«завтра» — существует</li>
-            </ul>
-          </div>
-          <div class="tgroup">
-            <p class="label">Условие выхода</p>
-            <p class="hand">учёт <span class="int">∮<span class="lim"><i>b</i><i>a</i></span></span> реальности в глубине рекурсии</p>
-            <p class="note">Первое слово неразборчиво, похоже на «учёт». ∮ — знак интеграла по замкнутому контуру от a до b, как петля на рисунке.</p>
-          </div>
-          <div class="tgroup">
-            <p class="label">Последствия</p>
-            <ul class="tlist hand pale">
-              <li>сохраняем</li>
-              <li>живём на чистовик</li>
-            </ul>
-            <p class="note">Написано бледно-розовым.</p>
-          </div>
-        </aside>
+        <section class="story-wrap" aria-labelledby="gh-story">
+          <h3 class="label" id="gh-story">Как устроен этот мир</h3>
+          <ol class="story">
+            <li class="s-step s-step--pale">
+              <p class="label">Причина</p>
+              <p class="hand">Мир прогнил</p>
+              <p>Люди перестали обращать внимание на последствия, перестали рисковать и доводить дела до конца, всё делали на автоматизме. И мир решил: «Ну, ребятки, раз вы так — держите кольцо времени».</p>
+            </li>
+            <li class="s-step">
+              <p class="label">Петля</p>
+              <p class="hand">Один день на всех</p>
+              <p>Закольцевали один день, а может, несколько. Каждое утро физическое состояние мира откатывается к нулевой дате, а память сохраняется у всех, а не у одного героя, как в фильме «День сурка».</p>
+            </li>
+            <li class="s-step">
+              <p class="label">Первые повторы</p>
+              <p class="hand">Хаос</p>
+              <p>Сначала никто ничего не понял. Потом побузили, потом мстили друг другу.</p>
+            </li>
+            <li class="s-step">
+              <p class="label">Потом</p>
+              <p class="hand">Угомонились</p>
+              <p>Все помнят, с кем что сделали, и могут договариваться. Постепенно нагулялись и наигрались.</p>
+            </li>
+            <li class="s-step">
+              <p class="label">Сотни тысяч повторов</p>
+              <p class="hand">Ищут выход</p>
+              <p>Хочется жить дальше: чтобы нарисованные картины сохранились в завтрашнем дне, а сделанное сегодня имело смысл в будущем. Перебирают гипотезы: «Давайте ещё что-нибудь попробуем».</p>
+            </li>
+            <li class="s-step s-step--hot">
+              <p class="label">Одна из попыток</p>
+              <p class="hand">Игра в «завтра»</p>
+              <p>Раз все живут так, будто завтра не будет, надо играть в то, что оно наступило. Потратил сегодня деньги — завтра, когда они снова у тебя, сожги их: вчера ты их потратил. Отношение к действительности сразу меняется, и игра становится чем-то вроде культа.</p>
+            </li>
+            <li class="s-step s-step--end">
+              <p class="label">Выход</p>
+              <p class="hand">Петля рвётся</p>
+              <p>Глубокое убеждение и принятие этой игры становится условием выхода. Вышли ли все разом, когда в последствия начали играть одновременно, или кто-то раньше, кто-то позже, — тут мнения разошлись.</p>
+            </li>
+            <li class="s-return s-alt">
+              <div>
+                <p class="label">Другая версия финала</p>
+                <p>Понарошку стало только материальное, а мысли и чувства работают как раньше. Люди стали придавать значение тому, что можно изменить, и день сурка перестал иметь значение.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
       </div>
-
-      <figure class="figure">
-        <div class="figure-box loop-box">
-          <div class="loop-stage">
-            <svg class="loop" id="loop" viewBox="0 0 960 280" role="img" aria-label="Петля времени: мир идёт по стрелке, попадает в петлю между точками a и b и ходит по ней по кругу. Выход из петли ведёт дальше по стрелке, в завтра.">
-              <path class="track" d="M30 140 H200"/>
-              <path class="exit" d="M400 140 H900"/>
-              <path class="arrowhead" d="M932 140 L900 126 L900 154 Z"/>
-              <circle class="ring-echo" cx="300" cy="140" r="118"/>
-              <circle class="ring" cx="300" cy="140" r="100"/>
-              <circle class="pt" cx="200" cy="140" r="6"/>
-              <circle class="pt" cx="400" cy="140" r="6"/>
-              <circle class="runner" id="runner" cx="200" cy="140" r="11"/>
-            </svg>
-            <span class="loop-lab" style="left: 18.2%; top: 66%">a</span>
-            <span class="loop-lab" style="left: 44.4%; top: 66%">b</span>
-            <span class="loop-lab" style="left: 31.25%; top: 50%">день 0</span>
-            <span class="loop-lab end" style="left: 88%; top: 30%">завтра</span>
-          </div>
-          <div class="loop-panel">
-            <p class="iter"><span class="label" id="iter-lab">Повтор №</span><strong id="iter">1</strong></p>
-            <div class="meter"><span class="label">Мир</span><span class="bar"><i id="m-world"></i></span></div>
-            <div class="meter"><span class="label">Память</span><span class="bar mem"><i id="m-mem"></i></span></div>
-            <button class="loop-btn" id="loop-btn" type="button">Сыграть в «завтра»</button>
-            <p class="loop-status" id="loop-status" aria-live="polite">Мир застрял в одном дне. Физически всё откатывается к утру, а память остаётся.</p>
-          </div>
-        </div>
-        <figcaption>Петля с плаката, перерисованная. Каждый круг — повтор дня: физическое состояние мира откатывается к нулевой дате, а память у людей копится. Выход открывается, когда начинают играть в последствия.</figcaption>
-      </figure>
 
       <figure class="figure">
         <div class="figure-box">
-          <p class="label fig-title">Как шли повторы</p>
-          <ol class="steps steps--3">
-            <li class="step" style="--c: var(--m-blue)">
-              <p class="label">Первые повторы</p>
-              <h3>Никто ничего не понял</h3>
-              <p>Каждое утро мир снова в том же состоянии, что и вчера.</p>
-            </li>
-            <li class="step" style="--c: var(--m-blue)">
-              <p class="label">Потом</p>
-              <h3>Хаос</h3>
-              <p>Осознав, что происходит, люди побузили, а потом все друг другу мстили.</p>
-            </li>
-            <li class="step" style="--c: var(--m-blue)">
-              <p class="label">Ещё позже</p>
-              <h3>Угомонились</h3>
-              <p>Все могут общаться и помнить результат общения на следующий день. Нагулялись, наигрались.</p>
-            </li>
-            <li class="step" style="--c: var(--m-blue)">
-              <p class="label">Сотни тысяч повторов</p>
-              <h3>Ищут выход</h3>
-              <p>Хочется жить дальше и чтобы сделанное сегодня имело смысл. Перебирают гипотезы: «Давайте ещё что-нибудь попробуем».</p>
-            </li>
-            <li class="step" style="--c: var(--m-red)">
-              <p class="label">Одна из попыток</p>
-              <h3>Игра в «завтра»</h3>
-              <p>Жить так, будто завтра наступит. Потратил сегодня деньги — завтра их сожги, ведь вчера ты их потратил.</p>
-            </li>
-            <li class="step" style="--c: var(--m-pink)">
-              <p class="label">Выход</p>
-              <h3>Петля рвётся</h3>
-              <p>Глубокое убеждение и принятие этой игры становится условием выхода из бесконечной петли.</p>
-            </li>
-          </ol>
+          <p class="label fig-title">Петля с плаката</p>
+          <div class="loop-box">
+            <div class="loop-stage">
+              <svg class="loop" id="loop" viewBox="0 0 960 280" role="img" aria-label="Петля времени: мир идёт по стрелке, попадает в петлю между точками a и b и ходит по ней по кругу. Выход из петли ведёт дальше по стрелке, в завтра.">
+                <path class="track" d="M30 140 H200"/>
+                <path class="exit" d="M400 140 H900"/>
+                <path class="arrowhead" d="M932 140 L900 126 L900 154 Z"/>
+                <circle class="ring-echo" cx="300" cy="140" r="118"/>
+                <circle class="ring" cx="300" cy="140" r="100"/>
+                <circle class="pt" cx="200" cy="140" r="6"/>
+                <circle class="pt" cx="400" cy="140" r="6"/>
+                <circle class="runner" id="runner" cx="200" cy="140" r="11"/>
+              </svg>
+              <span class="loop-lab" style="left: 18.2%; top: 66%">a</span>
+              <span class="loop-lab" style="left: 44.4%; top: 66%">b</span>
+              <span class="loop-lab" style="left: 31.25%; top: 50%">день 0</span>
+              <span class="loop-lab end" style="left: 88%; top: 30%">завтра</span>
+            </div>
+            <div class="loop-panel">
+              <p class="iter"><span class="label" id="iter-lab">Повтор №</span><strong id="iter">1</strong></p>
+              <div class="meter"><span class="label">Мир</span><span class="bar"><i id="m-world"></i></span></div>
+              <div class="meter"><span class="label">Память</span><span class="bar mem"><i id="m-mem"></i></span></div>
+              <button class="loop-btn" id="loop-btn" type="button">Сыграть в «завтра»</button>
+              <p class="loop-status" id="loop-status" aria-live="polite">Каждый круг — повтор дня.</p>
+            </div>
+          </div>
         </div>
       </figure>
 
-      <div class="case-body">
-        <section class="block" aria-labelledby="gh-report">
-          <h3 class="label" id="gh-report">Главное из доклада</h3>
-          <ul class="points">
-            <li>Мир прогнил, человечество опустилось. Люди перестали обращать внимание на последствия, перестали рисковать и делать то, у чего есть настоящие последствия. И мир решил: «Ну, ребятки, раз вы так — держите кольцо времени».</li>
-            <li>Закольцевали один день, а может, несколько: каждое утро все просыпаются в том же состоянии мира, что и в предыдущий «день». Отличие от фильма «День сурка» в том, что память сохраняется у всех, а не у одного героя.</li>
-            <li>Сначала наступил откровенный хаос. Но спустя сотни тысяч повторов встал вопрос, как выбраться из бесконечной петли. Хочется жить дальше. Хочется, чтобы картины, которые ты нарисовал, сохранились в завтрашнем дне и сделанное сегодня имело хоть какой-то смысл в будущем.</li>
-            <li>Из множества гипотез решили попробовать такую. Раз завтра не наступает и все вынуждены жить так, будто его не будет, давайте играть в то, что оно наступило. Жить сегодня так, будто завтра есть, — на протяжении бесконечного числа повторов физического мира.</li>
-            <li>Когда в это сыграли, отношение к действительности сразу поменялось. Игра в то, что завтра действительно есть, стала чем-то вроде культа. Глубокое убеждение и принятие этой игры и стали условием выхода из петли.</li>
-            <li>Дальше мнения разошлись. Может быть, выйти получилось, только когда в последствия начали играть все одновременно, в одном мире. А может, кто-то выходил раньше, кто-то позже.</li>
-            <li>Ещё одна версия. Люди поняли, что понарошку стало только то, что отражается в материальном мире. А то, что отражается в мыслях и чувствах, продолжает работать как раньше. Люди стали уделять этому больше внимания и стремиться к связанным с этим целям, и в итоге день сурка как будто перестал иметь значение.</li>
-          </ul>
-        </section>
-
-        <section class="block" aria-labelledby="gh-qa">
-          <h3 class="label" id="gh-qa">Из обсуждения</h3>
-          <div class="qa">
-            <div>
-              <p class="q">Кто закольцевал время? Бог?</p>
-              <p class="a">Не бог. В этом варианте это скорее что-то из коллективного бессознательного и его взаимодействия с миром. Мир в некотором смысле обладает сознанием.</p>
-            </div>
-            <div>
-              <p class="q">Что откатывается, а что остаётся? А деньги?</p>
-              <p class="a">Материально откатывается всё, деньги тоже. А то, с кем ты что сделал, все помнят и на следующем повторе. Раз все могут общаться и сохранять результат общения, постепенно пришли к тому, чтобы вместе искать выход. Игра в «завтра» — одна из таких попыток.</p>
-            </div>
-            <div>
-              <p class="q">Так во что играть-то надо? И где здесь подлинность — она так и не наступает?</p>
-              <p class="a">Когда день меняется, а физически всё откатывается обратно, это не наступление завтра. Подлинность в том, что происходит в результате игры в «завтра»: в конце концов петля разрывается через последствия, и тогда они действительно происходят.</p>
-            </div>
-            <p class="label sub-head">Суждения</p>
-            <blockquote class="remark">
-              <p>«Люди в вашем мире могли действовать абсолютно осознанно, серьёзно и со всеми последствиями — но только в пределах этого дня. Можно было убить кого угодно, а после рестарта всё обнулится, кроме памяти».</p>
-              <span class="label">Суждение из зала</span>
-            </blockquote>
-            <blockquote class="remark">
-              <p>«Когда я думала про подлинность, я говорила, что это единение с последствиями, и мне нравится, что вы это тоже вписали. Последствия на самом деле — и для тебя, и для других, и для мира. Когда ты подлинный, ты с ними связан».</p>
-              <span class="label">Суждение не из группы</span>
-            </blockquote>
-            <blockquote class="remark">
-              <p>«Вы пришли к подлинности от времени понарошку, к подлинности мира как социальных правил. Но остаётся нерешённой подлинность рождения и смерти. В дне сурка умерший на следующий день снова жив, а родившегося ребёнка завтра уже нет. Никогда не заведёшь семью. Заболеешь — и никогда не умрёшь».</p>
-              <span class="label">Суждение из зала</span>
-            </blockquote>
-            <blockquote class="remark">
-              <p>«Получится поколение очень мудрых, много знающих людей. Пока они просто не умрут от старости».</p>
-              <span class="label">Суждение из зала</span>
-            </blockquote>
-            <blockquote class="remark">
-              <p>«У меня другая картина. Люди просто остались в дне сурка, но у них изменились ценности. Понарошку стало только материальное: если концентрироваться на нём, всё действительно понарошку. А если придавать значение тому, что можно изменить, то уже давно не понарошку».</p>
-              <span class="label">Суждение из группы</span>
-            </blockquote>
+      <section class="case-body" aria-labelledby="gh-talk">
+        <h3 class="label" id="gh-talk">Из обсуждения</h3>
+        <div class="talk">
+          <div class="t-item t-q">
+            <p class="label">Вопрос из зала</p>
+            <p class="q">Кто закольцевал время? Бог?</p>
+            <p class="a">Не бог. Скорее что-то из коллективного бессознательного и его взаимодействия с миром. Мир в некотором смысле обладает сознанием.</p>
           </div>
-        </section>
-      </div>
+          <div class="t-item t-q">
+            <p class="label">Вопрос из зала</p>
+            <p class="q">Так во что играть-то надо? И где здесь подлинность — она так и не наступает?</p>
+            <p class="a">Смена дня, когда физически всё откатывается, — ещё не завтра. Подлинность в том, что получается из игры в «завтра»: петля разрывается через последствия, и тогда они действительно происходят.</p>
+            <p class="open-tag"><b>Осталось парадоксом</b><span>Если завтра началось с игры в завтра, оно наступило по-настоящему или понарошку?</span></p>
+          </div>
+          <blockquote class="t-item remark">
+            <p>«Люди в вашем мире могли действовать абсолютно осознанно, серьёзно и со всеми последствиями — но только в пределах этого дня. Можно было убить кого угодно, а после рестарта всё обнулится, кроме памяти».</p>
+            <span class="label">Суждение из зала</span>
+          </blockquote>
+          <blockquote class="t-item remark">
+            <p>«Когда я думала про подлинность, я говорила, что это единение с последствиями, и мне нравится, что вы это тоже вписали. Последствия на самом деле — и для тебя, и для других, и для мира. Когда ты подлинный, ты с ними связан».</p>
+            <span class="label">Суждение не из группы</span>
+          </blockquote>
+          <blockquote class="t-item remark">
+            <p>«Вы пришли к подлинности от времени понарошку, к подлинности мира как социальных правил. Но остаётся нерешённой подлинность рождения и смерти. В дне сурка умерший на следующий день снова жив, а родившегося ребёнка завтра уже нет. Никогда не заведёшь семью. Заболеешь — и никогда не умрёшь».</p>
+            <span class="label">Суждение из зала</span>
+            <p class="open-tag"><b>Осталось парадоксом</b></p>
+          </blockquote>
+          <blockquote class="t-item remark">
+            <p>«Получится поколение очень мудрых, много знающих людей. Пока они просто не умрут от старости».</p>
+            <span class="label">Суждение из зала</span>
+            <p class="open-tag"><b>Осталось парадоксом</b><span>Но тело каждое утро откатывается — может ли такое поколение состариться?</span></p>
+          </blockquote>
+        </div>
+      </section>
     </div>
   </article>
-
-  <section class="section" id="paradoxes" aria-labelledby="paradoxes-title">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="label">После разбора</p>
-        <h2 id="paradoxes-title">Что осталось парадоксом</h2>
-        <p>Вопросы, которые прозвучали на разборе и остались открытыми. Цветом отмечено, к какому решению они относятся.</p>
-        <p class="legend label">
-          <span><i class="dot" style="--c: var(--m-red)"></i>Нарушение правил</span>
-          <span><i class="dot" style="--c: var(--m-blue)"></i>День сурка</span>
-        </p>
-      </div>
-      <div class="paradox-layout">
-        <ul class="paradoxes">
-          <li class="paradox">
-            <h3><span class="tags" aria-label="Нарушение правил"><i class="dot" style="--c: var(--m-red)"></i></span>Нарочно или понарошку</h3>
-            <p>Если игру выбрали сами и всерьёз, она ещё понарошку?</p>
-          </li>
-          <li class="paradox">
-            <h3><span class="tags" aria-label="Нарушение правил"><i class="dot" style="--c: var(--m-red)"></i></span>Нарушать или играть</h3>
-            <p>Подлинность проступает, когда правила нарушают. Так во что же всё-таки надо играть?</p>
-          </li>
-          <li class="paradox">
-            <h3><span class="tags" aria-label="Нарушение правил"><i class="dot" style="--c: var(--m-red)"></i></span>Мир без судей</h3>
-            <p>В мире идеального договора никто не следит за правилами. Кто тогда замечает нарушение?</p>
-          </li>
-          <li class="paradox">
-            <h3><span class="tags" aria-label="День сурка"><i class="dot" style="--c: var(--m-blue)"></i></span>Рождение и смерть</h3>
-            <p>В дне сурка нельзя ни родиться, ни умереть. Бывает ли подлинность без них?</p>
-          </li>
-          <li class="paradox">
-            <h3><span class="tags" aria-label="День сурка"><i class="dot" style="--c: var(--m-blue)"></i></span>Мудрые и нестареющие</h3>
-            <p>Память копится, а тело каждое утро откатывается. Может ли такое поколение умереть от старости?</p>
-          </li>
-          <li class="paradox">
-            <h3><span class="tags" aria-label="День сурка"><i class="dot" style="--c: var(--m-blue)"></i></span>Наступило или сыграли</h3>
-            <p>Если завтра началось с игры в завтра, оно наступило по-настоящему или понарошку?</p>
-          </li>
-        </ul>
-        <figure class="groundhog">
-          <div class="doodle" role="img" aria-label="Зелёный рисунок сурка с подписью «Это сурок»"></div>
-          <p class="sig">1) всамделишний<br>2) настоящий</p>
-          <figcaption>Сурок с плаката первой группы. Сурок есть на обоих плакатах: у первой группы он нарисован, у второй — в названии.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
 
   <section class="finale" aria-labelledby="finale-title">
     <div class="wrap">
       <p class="label">С плаката второй группы</p>
       <p class="big" id="finale-title">Живём на чистовик</p>
-      <p>Обе группы пришли к одному: подлинность начинается там, где у поступков снова есть последствия. В первом мире они возвращаются, когда нарушают правила. Во втором — когда в них начинают играть.</p>
+      <p>Обе группы пришли к одному: подлинность начинается там, где у поступков снова есть последствия.</p>
     </div>
   </section>
 </main>
@@ -1255,10 +1064,8 @@ a:hover { text-decoration-thickness: 2px; }
   <div class="wrap label">
     <p class="about">«РанДом Культуры» — площадка культурных событий в центре Москвы: Большой Николопесковский переулок, 13, метро «Смоленская».</p>
     <p class="about">Встречу организовала и вела <a href="https://t.me/barbrabbar" target="_blank" rel="noopener">Варвара Буран</a>. <a href="https://t.me/random_culture/1545" target="_blank" rel="noopener">Анонс встречи</a>.</p>
-    <p><strong>РанДом Культуры</strong> · решение парадоксальной задачи · 13 октября 2026, 18:30–21:00</p>
     <p>Текст восстановлен по автоматической расшифровке записи и фотографиям плакатов. Расшифровка местами путала слова, поэтому формулировки близки к сказанному, но не дословны.</p>
     <p>Фото плакатов выровнены и осветлены. У фото со встречи поправлен цвет и убраны служебные данные.</p>
-    <p>Площадка: <a href="https://t.me/random_culture" target="_blank" rel="noopener">РанДом Культуры в Telegram</a></p>
     <p>Ещё одна парадоксальная задача: <a href="https://wolkill.github.io/attention-questions/" target="_blank" rel="noopener">«Задача на внимание»</a></p>
     <p><a href="#title">Наверх</a></p>
   </div>
@@ -1379,7 +1186,7 @@ a:hover { text-decoration-thickness: 2px; }
       s.world = Math.min(1, 0.5 + 0.5 * s.t);
       if (s.t >= 1) {
         s.t = 1;
-        setStatus('Петля разорвана: завтра наступило, и последствия сохраняются.');
+        setStatus('Петля разорвана: завтра наступило.');
         btn.textContent = 'Начать сначала';
         btn.disabled = false;
       }
@@ -1402,7 +1209,7 @@ a:hover { text-decoration-thickness: 2px; }
     if (s.mode === 'out' && s.t >= 1) {
       reset();
       btn.textContent = 'Сыграть в «завтра»';
-      setStatus('Мир снова застрял в одном дне. Физически всё откатывается к утру, а память остаётся.');
+      setStatus('Каждый круг — повтор дня.');
       if (still) { s.mode = 'loop'; s.mem = 0.6; s.laps = 1; }
       render();
       run();
@@ -1410,14 +1217,14 @@ a:hover { text-decoration-thickness: 2px; }
     }
     if (still) {
       s.mode = 'out'; s.t = 1; s.world = 1;
-      setStatus('Петля разорвана: завтра наступило, и последствия сохраняются.');
+      setStatus('Петля разорвана: завтра наступило.');
       btn.textContent = 'Начать сначала';
       render();
       return;
     }
     s.wantOut = true;
     btn.disabled = true;
-    setStatus('Играем в «завтра»: у поступков есть последствия даже при бесконечных повторах. Выход — в точке b.');
+    setStatus('Играем в «завтра». Выход — в точке b.');
   });
 
   reset();
