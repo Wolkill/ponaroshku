@@ -284,11 +284,15 @@ a:hover { text-decoration-thickness: 2px; }
   margin-bottom: clamp(26px, 4vw, 40px);
 }
 @media (max-width: 559px) { .case-head { grid-template-columns: minmax(0, 1fr); } }
-.case-num { grid-row: span 3; align-self: center; font: 700 clamp(6rem, 3.6rem + 9vw, 10.5rem)/.72 var(--font-hand); color: var(--accent); }
+.case-num { grid-row: span 4; align-self: center; font: 700 clamp(6rem, 3.6rem + 9vw, 10.5rem)/.72 var(--font-hand); color: var(--accent); }
 @media (max-width: 559px) { .case-num { grid-row: auto; font-size: 5.2rem; } }
 .case .eyebrow { color: var(--accent); }
 .case h2 { font-weight: 800; font-size: clamp(2.4rem, 1.1rem + 5vw, 4.7rem); line-height: .92; }
 .case-sub { font: 500 .95rem/1.3 var(--font-mono); color: var(--ink-soft); }
+.team { display: flex; flex-wrap: wrap; gap: 4px 28px; margin-top: 8px; }
+.team div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.team dt { font: 500 .7rem/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.team dd { margin: 0; font: 600 1.4rem/1.15 var(--font-hand); }
 .spread { display: grid; gap: clamp(26px, 4vw, 48px); align-items: start; }
 @media (min-width: 940px) { .spread { grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr); } }
 
@@ -619,7 +623,7 @@ a:hover { text-decoration-thickness: 2px; }
         <li class="step">
           <p class="label">Шаг 1</p>
           <h3>Плакат</h3>
-          <p>Каждая группа с модератором вырабатывает позицию и рисует её маркерами на большом листе.</p>
+          <p>Каждая группа с координатором вырабатывает позицию и рисует её маркерами на большом листе.</p>
         </li>
         <li class="step">
           <p class="label">Шаг 2</p>
@@ -768,6 +772,10 @@ a:hover { text-decoration-thickness: 2px; }
         <p class="label eyebrow">Решение первой группы</p>
         <h2 id="rules-title">Игра в нарушение правил</h2>
         <p class="case-sub">понарошку → игра → подлинность</p>
+        <dl class="team">
+          <div><dt>Координатор</dt><dd>Кот</dd></div>
+          <div><dt>Участники</dt><dd>Илья, Аня, Иван, Гена</dd></div>
+        </dl>
       </header>
 
       <div class="spread">
@@ -907,6 +915,10 @@ a:hover { text-decoration-thickness: 2px; }
         <p class="label eyebrow">Решение второй группы</p>
         <h2 id="gh-title">День сурка (всеобщий)</h2>
         <p class="case-sub">играть в то, что завтра существует</p>
+        <dl class="team">
+          <div><dt>Координатор</dt><dd>Буран</dd></div>
+          <div><dt>Участники</dt><dd>Спектр, Зеркало, Дима, Матвей</dd></div>
+        </dl>
       </header>
 
       <div class="spread">
@@ -1024,6 +1036,11 @@ a:hover { text-decoration-thickness: 2px; }
           </div>
           <div class="t-item t-q">
             <p class="label">Вопрос из зала</p>
+            <p class="q">А что с ментальными расстройствами?</p>
+            <p class="a">Память сохраняется и тут, так что в этом мире потихоньку будут копиться сумасшедшие.</p>
+          </div>
+          <div class="t-item t-q">
+            <p class="label">Вопрос из зала</p>
             <p class="q">Так во что играть-то надо? И где здесь подлинность — она так и не наступает?</p>
             <p class="a">Смена дня, когда физически всё откатывается, — ещё не завтра. Подлинность в том, что получается из игры в «завтра»: петля разрывается через последствия, и тогда они действительно происходят.</p>
             <p class="open-tag"><b>Осталось парадоксом</b><span>Если завтра началось с игры в завтра, оно наступило по-настоящему или понарошку?</span></p>
@@ -1042,9 +1059,9 @@ a:hover { text-decoration-thickness: 2px; }
             <p class="open-tag"><b>Осталось парадоксом</b></p>
           </blockquote>
           <blockquote class="t-item remark">
-            <p>«Получится поколение очень мудрых, много знающих людей. Пока они просто не умрут от старости».</p>
-            <span class="label">Суждение из зала</span>
-            <p class="open-tag"><b>Осталось парадоксом</b><span>Но тело каждое утро откатывается — может ли такое поколение состариться?</span></p>
+            <p>«В этом мире можно быть бесконечно молодым и бесконечно накапливать мудрость. Получится поколение очень мудрых, много знающих людей».</p>
+            <span class="label">Суждение автора вопроса о расстройствах</span>
+            <p class="open-tag"><b>Осталось парадоксом</b><span>Память копит и мудрость, и безумие — чего накопится больше?</span></p>
           </blockquote>
         </div>
       </section>
