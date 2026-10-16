@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Мир понарошку</title>
-<meta name="description" content="Отчёт о решении парадоксальной задачи: придумать мир, в котором всё стало понарошку, и найти игру, которая вернёт подлинность. Два решения: игра в нарушение правил и всеобщий день сурка.">
+<meta name="description" content="Отчёт о встрече 13 октября 2026 года в «РанДоме Культуры»: решение парадоксальной задачи — придумать мир, в котором всё стало понарошку, и найти игру, которая вернёт подлинность. Два решения: игра в нарушение правил и всеобщий день сурка.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Мир понарошку">
-<meta property="og:description" content="Во что нужно играть, чтобы обрести подлинность? Два решения парадоксальной задачи: игра в нарушение правил и всеобщий день сурка.">
+<meta property="og:description" content="РанДом Культуры, 13 октября 2026. Во что нужно играть, чтобы обрести подлинность? Два решения парадоксальной задачи: игра в нарушение правил и всеобщий день сурка.">
 <meta property="og:image" content="https://wolkill.github.io/ponaroshku/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='2' width='28' height='28' rx='7' fill='%23c2402a'/%3E%3Ccircle cx='10' cy='10' r='3' fill='white'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3Ccircle cx='22' cy='22' r='3' fill='white'/%3E%3C/svg%3E">
@@ -274,6 +274,16 @@ a:hover { text-decoration-thickness: 2px; }
 .step-quote { margin-top: 26px; max-width: var(--measure); padding-left: 18px; border-left: 3px solid var(--ink); font-style: italic; }
 .step-quote .label { display: block; margin-top: 6px; font-style: normal; font-size: .7rem; }
 
+/* Photo gallery */
+.gallery { padding: 0; list-style: none; display: grid; gap: clamp(10px, 2vw, 18px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 779px) { .gallery > li:first-child { grid-column: 1 / -1; } }
+@media (min-width: 780px) { .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.gallery figure { display: grid; gap: 7px; }
+.photo-btn { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; overflow: hidden; }
+.photo-btn img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .35s ease; }
+.photo-btn:hover img { transform: scale(1.03); }
+.gallery figcaption { font: 400 .78rem/1.35 var(--font-mono); color: var(--ink-soft); }
+
 /* Case files: one per solution */
 .case {
   --accent: var(--m-red);
@@ -537,7 +547,7 @@ a:hover { text-decoration-thickness: 2px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .circled path { animation: none; }
-  .poster-btn img, .to-top, .loop .exit { transition: none; }
+  .poster-btn img, .photo-btn img, .to-top, .loop .exit { transition: none; }
 }
 </style>
 </head>
@@ -546,8 +556,8 @@ a:hover { text-decoration-thickness: 2px; }
 
 <header class="masthead">
   <div class="wrap label">
-    <strong>Парадоксальная задача</strong>
-    <span>Мир понарошку · <span class="nowrap">два решения</span></span>
+    <strong><a href="https://t.me/random_culture" target="_blank" rel="noopener">РанДом Культуры</a></strong>
+    <span>Решение парадоксальной задачи · <span class="nowrap">13.10.2026</span></span>
   </div>
 </header>
 
@@ -555,13 +565,14 @@ a:hover { text-decoration-thickness: 2px; }
   <section class="hero" aria-labelledby="title">
     <div class="wrap">
       <div class="hero-text">
-        <p class="label">Отчёт о решении задачи · <span class="nowrap">две группы</span> · <span class="nowrap">два плаката</span></p>
+        <p class="label">Отчёт о встрече · <span class="nowrap">13 октября 2026</span> · <span class="nowrap">18:30–21:00</span> · <span class="nowrap">РанДом Культуры</span></p>
         <h1 id="title"><span class="line">Мир</span> <span class="line"><span class="circled"><span class="hollow">понарошку</span><svg viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M24 70 C10 40 70 10 160 9 C250 8 296 28 292 52 C288 80 210 95 140 93 C70 91 14 80 16 56 C18 38 50 24 98 18"/></svg></span></span></h1>
         <p class="lead">Задача парадоксальная: игра сама по себе понарошку, а искать с её помощью нужно подлинность. Две группы придумали два мира. В первом подлинность проступает, когда нарушают правила игры. Во втором человечество застряло во всеобщем дне сурка и выбирается из него, играя в то, что завтра существует.</p>
         <ul class="toc" aria-label="Разделы">
           <li><a href="#task">Условие</a></li>
           <li><a href="#words">Минус и плюс</a></li>
           <li><a href="#format">Разбор</a></li>
+          <li><a href="#photos">Фото</a></li>
           <li><a href="#rules"><span class="dot" style="--c: var(--m-red)"></span>Нарушение правил</a></li>
           <li><a href="#groundhog"><span class="dot" style="--c: var(--m-blue)"></span>День сурка</a></li>
           <li><a href="#paradoxes">Парадоксы</a></li>
@@ -654,9 +665,9 @@ a:hover { text-decoration-thickness: 2px; }
   <section class="section" id="format" aria-labelledby="format-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="label">Формат</p>
+        <p class="label">18:30–21:00</p>
         <h2 id="format-title">Как шёл разбор</h2>
-        <p>Группы придумывали свой мир и рисовали итоговый плакат. Потом каждая выступала, а остальные разбирали решение по шагам.</p>
+        <p>Участники разделились на группы, у каждой были модератор, маркеры и большой лист для плаката. Потом группы встретились на конференции: рассказали свои решения и задавали друг другу вопросы. Вела встречу <a href="https://t.me/barbrabbar" target="_blank" rel="noopener">Варвара Буран</a>.</p>
       </div>
       <ol class="steps steps--5">
         <li class="step">
@@ -689,6 +700,117 @@ a:hover { text-decoration-thickness: 2px; }
         <p>«Отвечать на суждение нельзя. Это важно».</p>
         <span class="label">Из правил разбора</span>
       </blockquote>
+    </div>
+  </section>
+
+  <section class="section" id="photos" aria-labelledby="photos-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Фотографии</p>
+        <h2 id="photos-title">Как это было</h2>
+        <p>Вечер в «РанДоме Культуры»: доклады обеих групп, слушатели и разговоры на улице после встречи. Нажмите на фото, чтобы открыть его крупно.</p>
+      </div>
+      <ul class="gallery">
+        <li>
+          <figure>
+            <button class="photo-btn" type="button" data-full="assets/photos/01.jpg" data-caption="Своды «РанДома»">
+              <picture>
+                <source type="image/webp" srcset="assets/photos/01-sm.webp 900w, assets/photos/01.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
+                <img src="assets/photos/01-sm.jpg" srcset="assets/photos/01-sm.jpg 900w, assets/photos/01.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Кирпичные своды потолка с подсветкой, ниже — гирлянды на кирпичной стене." loading="lazy" decoding="async">
+              </picture>
+            </button>
+            <figcaption>Своды «РанДома»</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <button class="photo-btn" type="button" data-full="assets/photos/02.jpg" data-caption="Первая группа выходит с плакатом">
+              <picture>
+                <source type="image/webp" srcset="assets/photos/02-sm.webp 900w, assets/photos/02.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
+                <img src="assets/photos/02-sm.jpg" srcset="assets/photos/02-sm.jpg 900w, assets/photos/02.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Участник держит плакат «Понарошку», рядом стоят ещё двое из группы, на первом плане участница." loading="lazy" decoding="async">
+              </picture>
+            </button>
+            <figcaption>Первая группа выходит с плакатом</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <button class="photo-btn" type="button" data-full="assets/photos/03.jpg" data-caption="Доклад первой группы">
+              <picture>
+                <source type="image/webp" srcset="assets/photos/03-sm.webp 900w, assets/photos/03.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
+                <img src="assets/photos/03-sm.jpg" srcset="assets/photos/03-sm.jpg 900w, assets/photos/03.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Трое у кирпичной стены, в центре участник держит плакат «Понарошку»." loading="lazy" decoding="async">
+              </picture>
+            </button>
+            <figcaption>Доклад первой группы</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <button class="photo-btn" type="button" data-full="assets/photos/04.jpg" data-caption="Слушатели">
+              <picture>
+                <source type="image/webp" srcset="assets/photos/04-sm.webp 900w, assets/photos/04.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
+                <img src="assets/photos/04-sm.jpg" srcset="assets/photos/04-sm.jpg 900w, assets/photos/04.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Слушатели сидят и смотрят на докладчиков, один лежит на красном диване под пледом со звёздами." loading="lazy" decoding="async">
+              </picture>
+            </button>
+            <figcaption>Слушатели</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <button class="photo-btn" type="button" data-full="assets/photos/05.jpg" data-caption="Доклад второй группы">
+              <picture>
+                <source type="image/webp" srcset="assets/photos/05-sm.webp 900w, assets/photos/05.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
+                <img src="assets/photos/05-sm.jpg" srcset="assets/photos/05-sm.jpg 900w, assets/photos/05.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Общий план зала: двое держат плакат «День сурка», слушатели сидят на полу и на стульях." loading="lazy" decoding="async">
+              </picture>
+            </button>
+            <figcaption>Доклад второй группы</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <button class="photo-btn" type="button" data-full="assets/photos/06.jpg" data-caption="«День сурка (всеобщий)»">
+              <picture>
+                <source type="image/webp" srcset="assets/photos/06-sm.webp 900w, assets/photos/06.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
+                <img src="assets/photos/06-sm.jpg" srcset="assets/photos/06-sm.jpg 900w, assets/photos/06.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Двое докладчиков второй группы держат плакат и рассказывают." loading="lazy" decoding="async">
+              </picture>
+            </button>
+            <figcaption>«День сурка (всеобщий)»</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <button class="photo-btn" type="button" data-full="assets/photos/07.jpg" data-caption="Плакат второй группы">
+              <picture>
+                <source type="image/webp" srcset="assets/photos/07-sm.webp 900w, assets/photos/07.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
+                <img src="assets/photos/07-sm.jpg" srcset="assets/photos/07-sm.jpg 900w, assets/photos/07.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="602" alt="Докладчик улыбается и держит плакат «День сурка (всеобщий)»." loading="lazy" decoding="async">
+              </picture>
+            </button>
+            <figcaption>Плакат второй группы</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <button class="photo-btn" type="button" data-full="assets/photos/08.jpg" data-caption="После встречи">
+              <picture>
+                <source type="image/webp" srcset="assets/photos/08-sm.webp 900w, assets/photos/08.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
+                <img src="assets/photos/08-sm.jpg" srcset="assets/photos/08-sm.jpg 900w, assets/photos/08.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="675" alt="Участники разговаривают на вечерней улице у жёлтого дома под фонарями." loading="lazy" decoding="async">
+              </picture>
+            </button>
+            <figcaption>После встречи</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <button class="photo-btn" type="button" data-full="assets/photos/09.jpg" data-caption="Разговор продолжается на улице">
+              <picture>
+                <source type="image/webp" srcset="assets/photos/09-sm.webp 900w, assets/photos/09.webp 1280w" sizes="(min-width: 780px) 360px, 50vw">
+                <img src="assets/photos/09-sm.jpg" srcset="assets/photos/09-sm.jpg 900w, assets/photos/09.jpg 1280w" sizes="(min-width: 780px) 360px, 50vw" width="900" height="675" alt="Участники стоят кругом на тротуаре вечером, рядом фонарь и кованый козырёк." loading="lazy" decoding="async">
+              </picture>
+            </button>
+            <figcaption>Разговор продолжается на улице</figcaption>
+          </figure>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -1131,8 +1253,12 @@ a:hover { text-decoration-thickness: 2px; }
 
 <footer class="site-foot">
   <div class="wrap label">
+    <p class="about">«РанДом Культуры» — площадка культурных событий в центре Москвы: Большой Николопесковский переулок, 13, метро «Смоленская».</p>
+    <p class="about">Встречу организовала и вела <a href="https://t.me/barbrabbar" target="_blank" rel="noopener">Варвара Буран</a>. <a href="https://t.me/random_culture/1545" target="_blank" rel="noopener">Анонс встречи</a>.</p>
+    <p><strong>РанДом Культуры</strong> · решение парадоксальной задачи · 13 октября 2026, 18:30–21:00</p>
     <p>Текст восстановлен по автоматической расшифровке записи и фотографиям плакатов. Расшифровка местами путала слова, поэтому формулировки близки к сказанному, но не дословны.</p>
-    <p>Фото плакатов выровнены и осветлены.</p>
+    <p>Фото плакатов выровнены и осветлены. У фото со встречи поправлен цвет и убраны служебные данные.</p>
+    <p>Площадка: <a href="https://t.me/random_culture" target="_blank" rel="noopener">РанДом Культуры в Telegram</a></p>
     <p>Ещё одна парадоксальная задача: <a href="https://wolkill.github.io/attention-questions/" target="_blank" rel="noopener">«Задача на внимание»</a></p>
     <p><a href="#title">Наверх</a></p>
   </div>
@@ -1140,7 +1266,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 <a class="to-top" href="#title" aria-label="Наверх"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13.5V2.5M3 7.5 8 2.5l5 5"/></svg><span>Наверх</span></a>
 
-<dialog class="lightbox" id="lightbox" aria-label="Плакат крупно">
+<dialog class="lightbox" id="lightbox" aria-label="Фото крупно">
   <button class="lb-close" type="button">Закрыть</button>
   <div class="lb-inner">
     <img alt="">
@@ -1153,7 +1279,7 @@ a:hover { text-decoration-thickness: 2px; }
 (function () {
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Poster lightbox
+  // Lightbox for posters and photos
   var dlg = document.getElementById('lightbox');
   var big = dlg.querySelector('img');
   var cap = dlg.querySelector('.lb-cap');
